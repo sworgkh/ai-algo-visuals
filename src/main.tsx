@@ -1,6 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+// HashRouter (not BrowserRouter): deep links live under `#`, so refreshing
+// /#/topic/hmm never hits the server as a path — it works on any static host
+// (incl. AWS Amplify) with zero rewrite/redirect config. `?tab=`/`?step=`/`?ex=`
+// query params still work (they sit after the hash). See amplify.yml notes.
+import { HashRouter, Route, Routes } from 'react-router-dom'
 
 // Vendored fonts + math CSS (bundled — no external requests, stays fully static).
 import '@fontsource-variable/inter'
@@ -15,7 +19,7 @@ import { TopicRoute } from '@/components/TopicRoute'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route element={<App />}>
           <Route index element={<Home />} />
@@ -23,6 +27,6 @@ createRoot(document.getElementById('root')!).render(
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 )

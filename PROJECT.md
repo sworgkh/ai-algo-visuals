@@ -201,7 +201,7 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 
 ### Decisions
 - **Animation engine: Framer Motion + d3 (Remotion deferred).** Interactive step-through is the exam skill (user-controlled state), which Framer Motion + d3 layout serve best; Remotion's build-time video shines for non-interactive intros and can be added per-topic later without disturbing the static build.
-- **Routing: `BrowserRouter` (clean URLs).** Primary use is `npm run dev` + deploy `dist/` to a static host; SPA fallback configs shipped for Netlify/Vercel. (For sub-path hosting set `base` in `vite.config.ts`.)
+- **Routing: `HashRouter` (host-agnostic deep links).** Switched from `BrowserRouter` so refreshing a deep link (`/#/topic/hmm?tab=viterbi`) works on *any* static host with **zero rewrite/redirect config** — AWS Amplify Hosting (unlike Netlify/Vercel) has no repo-committed redirects file, so this is the only fully version-controlled fix. Trade-off: URLs carry a `#`. `?tab`/`?step`/`?ex` query params still work (they sit after the hash). The old Netlify/Vercel SPA-fallback files (`public/_redirects`, `vercel.json`) are now redundant but harmless.
 - **StepPlayer state via a local `useStepPlayer` hook, not a global store (dropped the planned Zustand dep).** Lets multiple independent players coexist on one page; YAGNI on global state.
 - **Fonts vendored via `@fontsource-variable/*` (Inter + JetBrains Mono).** No external font requests → stays fully static/offline.
 - **Icons: local inline SVG set** (`components/Icons.tsx`) — zero icon-library weight, on-brand.
