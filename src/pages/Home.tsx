@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { TOPICS } from '@/topics/registry'
 import { FormulaBlock } from '@/components/FormulaBlock'
 import { term } from '@/components/formula'
-import { Lock, Star } from '@/components/Icons'
+import { Lock } from '@/components/Icons'
 import './Home.css'
 
 const FILTERING_TEX = String.raw`P(X_t \mid e_{1:t}) = ${term('norm', '\\alpha')}\;${term(
@@ -53,30 +53,29 @@ export function Home() {
           See the algorithms <span className="grad">move</span>.
         </h1>
         <p className="home-lede">
-          An interactive study companion for the exam — watch BFS flood a grid, a POP planner
-          resolve a threat, probability mass flow through a Bayesian network, and particles die
-          and resample. Built to make the <em>mechanics</em> visible, one topic at a time.
+          An interactive study companion — watch BFS flood a grid, a POP planner resolve a
+          threat, probability mass flow through a Bayesian network, and particles die and
+          resample. Built to make the <em>mechanics</em> visible, one topic at a time.
         </p>
       </header>
 
-      <section className="home-exam">
-        <div className="card exam-card">
-          <span className="exam-tag exam-tag--a">Part A</span>
-          <h3>True / False — graded on reasoning</h3>
+      <section className="home-approach">
+        <div className="card approach-card">
+          <span className="approach-tag">Step through it</span>
+          <h3>Narrate the reasoning</h3>
           <p>
-            Almost entirely about <em>why</em>. Each visualization runs in step-through mode so
-            you can narrate the reasoning at every step — that narration is the exam skill.
+            Every visualization runs in step-through mode with a “why” at each step, so you can
+            follow the mechanics move by move — <em>why</em> each choice happens, not just that it
+            does.
           </p>
         </div>
-        <div className="card exam-card">
-          <span className="exam-tag exam-tag--b">
-            <Star size={12} /> Part B
-          </span>
-          <h3>Open computational questions</h3>
+        <div className="card approach-card">
+          <span className="approach-tag">Edit &amp; recompute</span>
+          <h3>Play with the numbers</h3>
           <p>
-            Historically <strong>POP planning</strong>, <strong>Bayesian-network inference</strong>,
-            and <strong>HMM filtering</strong>. Those topics ship with editable inputs and live
-            recomputation so you can practice cranking real numbers.
+            <strong>POP planning</strong>, <strong>Bayesian-network inference</strong>, and{' '}
+            <strong>HMM filtering</strong> ship with editable inputs and live recomputation, so
+            you can experiment with concrete values yourself.
           </p>
         </div>
       </section>
@@ -98,11 +97,6 @@ export function Home() {
                 <div className="tc-top">
                   <span className="tc-num">{t.num}</span>
                   <div className="tc-badges">
-                    {t.examStar && (
-                      <span className="tc-star" title="Exam Part B">
-                        <Star size={12} />
-                      </span>
-                    )}
                     {locked ? (
                       <span className="tc-status tc-status--soon">
                         <Lock size={12} /> Soon

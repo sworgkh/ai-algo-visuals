@@ -13,7 +13,7 @@ const TABS: { id: TabId; label: string; blurb: string }[] = [
   { id: 'pop', label: 'POP Planner', blurb: 'Causal links, threats, promotion / demotion' },
   { id: 'strips', label: 'STRIPS forward', blurb: 'Apply actions; watch add/delete lists' },
   { id: 'regression', label: 'Regression', blurb: 'Search backward from the goal' },
-  { id: 'search', label: 'Forward vs. Backward', blurb: 'Branching & relevance (exam item)' },
+  { id: 'search', label: 'Forward vs. Backward', blurb: 'Branching & relevance' },
 ]
 
 const TAB_IDS: TabId[] = ['pop', 'strips', 'regression', 'search']

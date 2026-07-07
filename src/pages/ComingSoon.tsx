@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { Topic } from '@/topics/registry'
-import { Lock, Star } from '@/components/Icons'
+import { Lock } from '@/components/Icons'
 import './ComingSoon.css'
 
 export interface ComingSoonProps {
@@ -16,14 +16,7 @@ export function ComingSoon({ topic }: ComingSoonProps) {
           <Lock size={22} />
         </div>
         <span className="cs-eyebrow">Topic {topic.num}</span>
-        <h1 className="cs-title">
-          {topic.title}
-          {topic.examStar && (
-            <span className="cs-star" title="Exam Part B topic">
-              <Star size={16} />
-            </span>
-          )}
-        </h1>
+        <h1 className="cs-title">{topic.title}</h1>
         <p className="cs-tagline">{topic.tagline}</p>
 
         <div className="cs-preview">

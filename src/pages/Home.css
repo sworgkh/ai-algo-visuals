@@ -43,27 +43,27 @@
   max-width: 72ch;
 }
 
-/* --- Exam cards ---------------------------------------------------------- */
-.home-exam {
+/* --- Approach cards ------------------------------------------------------ */
+.home-approach {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-4);
 }
-.exam-card {
+.approach-card {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-5);
 }
-.exam-card h3 {
+.approach-card h3 {
   font-size: var(--text-lg);
   margin: 0;
 }
-.exam-card p {
+.approach-card p {
   color: var(--text-secondary);
   font-size: var(--text-base);
 }
-.exam-tag {
+.approach-tag {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
@@ -74,16 +74,9 @@
   text-transform: uppercase;
   padding: 3px 10px;
   border-radius: var(--radius-pill);
-}
-.exam-tag--a {
   color: var(--brand-300);
   background: #6366f11f;
   border: 1px solid var(--border-brand);
-}
-.exam-tag--b {
-  color: var(--warning);
-  background: var(--warning-dim);
-  border: 1px solid #fbbf2440;
 }
 
 /* --- Formula showcase ---------------------------------------------------- */
@@ -214,11 +207,6 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-}
-.tc-star {
-  color: var(--warning);
-  display: inline-grid;
-  place-items: center;
 }
 .tc-status {
   display: inline-flex;

@@ -21,8 +21,6 @@ export interface Topic {
   tagline: string
   /** Key concepts — rendered as chips on the topic page. */
   concepts: string[]
-  /** Historically appears in exam Part B (computational). */
-  examStar: boolean
   status: TopicStatus
   /** Lazily-loaded page; present only once the topic is built. */
   Component?: LazyExoticComponent<ComponentType>
@@ -41,9 +39,7 @@ export const TOPICS: Topic[] = [
       'Greedy & A*',
       'Admissible & consistent heuristics',
       'O(b^d) vs O(b·m)',
-    ],
-    examStar: false,
-    status: 'coming-soon',
+    ],    status: 'coming-soon',
   },
   {
     num: 2,
@@ -57,9 +53,7 @@ export const TOPICS: Topic[] = [
       'Partial-order planning',
       'Causal links & threats',
       'Promotion / demotion',
-    ],
-    examStar: true,
-    status: 'available',
+    ],    status: 'available',
     Component: lazy(() => import('./topic02-pop')),
   },
   {
@@ -73,9 +67,7 @@ export const TOPICS: Topic[] = [
       'Critical path (ES / LS / slack)',
       'Reusable vs. consumable resources',
       'Conformant / contingent / online',
-    ],
-    examStar: false,
-    status: 'coming-soon',
+    ],    status: 'coming-soon',
   },
   {
     num: 4,
@@ -89,9 +81,7 @@ export const TOPICS: Topic[] = [
       'Marginalization & normalization',
       '(Conditional) independence',
       'Bayes’ rule',
-    ],
-    examStar: false,
-    status: 'coming-soon',
+    ],    status: 'coming-soon',
   },
   {
     num: 5,
@@ -105,9 +95,7 @@ export const TOPICS: Topic[] = [
       'Variable ordering',
       'Explaining away',
       'Variable elimination',
-    ],
-    examStar: true,
-    status: 'coming-soon',
+    ],    status: 'coming-soon',
   },
   {
     num: 6,
@@ -120,9 +108,7 @@ export const TOPICS: Topic[] = [
       'Prediction & decay',
       'Forward–backward smoothing',
       'Viterbi (most likely path)',
-    ],
-    examStar: false,
-    status: 'coming-soon',
+    ],    status: 'coming-soon',
   },
   {
     num: 7,
@@ -135,9 +121,7 @@ export const TOPICS: Topic[] = [
       'Matrix filtering / smoothing',
       'Matrix Viterbi',
       'Mega-variable blowup',
-    ],
-    examStar: true,
-    status: 'coming-soon',
+    ],    status: 'coming-soon',
   },
   {
     num: 8,
@@ -150,9 +134,7 @@ export const TOPICS: Topic[] = [
       'Intractability of exact inference',
       'Particle filtering',
       'Sample → weight → resample',
-    ],
-    examStar: false,
-    status: 'coming-soon',
+    ],    status: 'coming-soon',
   },
   {
     num: 9,
@@ -165,9 +147,7 @@ export const TOPICS: Topic[] = [
       'Pipeline vs. end-to-end',
       'Tokenization / lemmatization / stemming',
       'Zipf’s law & OOV',
-    ],
-    examStar: false,
-    status: 'coming-soon',
+    ],    status: 'coming-soon',
   },
   {
     num: 10,
@@ -181,9 +161,7 @@ export const TOPICS: Topic[] = [
       'Chain rule vs. bigram trap',
       'Perplexity',
       'Laplace / backoff / interpolation',
-    ],
-    examStar: false,
-    status: 'coming-soon',
+    ],    status: 'coming-soon',
   },
 ]
 

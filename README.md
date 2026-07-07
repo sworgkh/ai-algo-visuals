@@ -1,6 +1,6 @@
-# AI Algorithms — Exam Portal
+# AI Algorithms — Interactive Visualizations
 
-Interactive visualization portal for **Algorithms in AI (3520103)** exam prep.
+Interactive visualization portal for **Algorithms in AI (3520103)**.
 One section per course topic; the site is built one topic at a time. See
 [`PROJECT.md`](./PROJECT.md) for the full brief, phase checklist, and changelog.
 

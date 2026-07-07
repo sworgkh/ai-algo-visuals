@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { TOPICS } from '@/topics/registry'
-import { Home, Lock, PanelLeft, Star } from './Icons'
+import { Home, Lock, PanelLeft } from './Icons'
 import './Sidebar.css'
 
 export interface SidebarProps {
@@ -12,11 +12,11 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
   return (
     <aside className={`sidebar${collapsed ? ' is-collapsed' : ''}`} aria-label="Topics">
       <div className="sb-head">
-        <a href="/" className="sb-brand" aria-label="AI Algorithms Exam Portal — Home">
+        <a href="/" className="sb-brand" aria-label="AI Algorithms — Home">
           <img className="sb-brand-mark" src="/favicon.svg" alt="" width={30} height={30} />
           <span className="sb-brand-text">
             <strong>AI Algorithms</strong>
-            <small>Exam Portal · 3520103</small>
+            <small>Algorithms in AI · 3520103</small>
           </span>
         </a>
         <button
@@ -55,11 +55,6 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 </span>
                 <span className="sb-label">
                   <span className="sb-topic-title">{t.title}</span>
-                  {t.examStar && (
-                    <span className="sb-star" title="Exam Part B topic">
-                      <Star size={11} />
-                    </span>
-                  )}
                 </span>
                 {locked && (
                   <span className="sb-lock" title="Coming soon">

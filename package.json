@@ -1,9 +1,9 @@
 {
-  "name": "ai-algo-exam-portal",
+  "name": "ai-algo-visuals",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Interactive visualization portal for the Algorithms in AI (3520103) exam prep",
+  "description": "Interactive visualization portal for Algorithms in AI (3520103)",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

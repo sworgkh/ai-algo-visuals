@@ -5,7 +5,7 @@ import './StepPlayer.css'
 
 export interface StepPlayerProps {
   player: StepPlayerApi
-  /** "Why" narration for the current step — the exam skill. */
+  /** "Why" narration for the current step. */
   caption?: ReactNode
   /** Short label for the current step, e.g. "Predict" / "Update". */
   stepLabel?: string

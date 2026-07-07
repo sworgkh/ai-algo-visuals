@@ -17,22 +17,22 @@ interface Child {
   relevant: boolean
 }
 
-function ExamCard() {
+function ConceptCard() {
   const [open, setOpen] = useState(false)
   return (
-    <section className="fb-exam">
-      <div className="fb-exam-head">
-        <span className="fb-exam-tag">Exam item · True / False</span>
+    <section className="fb-concept">
+      <div className="fb-concept-head">
+        <span className="fb-concept-tag">Concept check · True / False</span>
         <span className="fb-verdict">Verdict: True</span>
       </div>
       <blockquote className="fb-statement">
         “In planning problems, backward search can be more efficient than forward search.”
       </blockquote>
       <p className="fb-model">
-        <strong>Model answer:</strong> True. Regression only expands actions{' '}
-        <em>relevant</em> to the goal, whereas progression expands <em>all applicable</em> actions;
-        with a small goal and large action space this lowers the effective branching factor. It
-        isn’t universal — hence “can be”.
+        <strong>Why:</strong> True. Regression only expands actions <em>relevant</em> to the goal,
+        whereas progression expands <em>all applicable</em> actions; with a small goal and large
+        action space this lowers the effective branching factor. It isn’t universal — hence “can
+        be”.
       </p>
       <button className="fb-caveat-toggle" onClick={() => setOpen((o) => !o)}>
         {open ? '− Hide' : '+ Why only “can”?'}
@@ -47,8 +47,8 @@ function ExamCard() {
           >
             Regression reasons over <strong>sets</strong> of states (partial goal descriptions),
             which makes strong heuristics harder to compute. In practice, modern planners often run{' '}
-            <em>forward</em> with powerful heuristics and beat backward search. Acknowledging both
-            directions is the reasoning the grader wants.
+            <em>forward</em> with powerful heuristics and beat backward search — so the honest
+            answer weighs both directions.
           </motion.p>
         )}
       </AnimatePresence>
@@ -156,7 +156,7 @@ export function ForwardVsBackward() {
 
   return (
     <div className="forward-backward">
-      <ExamCard />
+      <ConceptCard />
 
       <div className="fb-cols">
         <SearchColumn

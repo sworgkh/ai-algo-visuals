@@ -36,14 +36,8 @@
   color: var(--brand-300);
 }
 .cs-title {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
   font-size: var(--text-2xl);
   margin: 0;
-}
-.cs-star {
-  color: var(--warning);
 }
 .cs-tagline {
   color: var(--text-secondary);
