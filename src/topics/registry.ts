@@ -144,7 +144,9 @@ export const TOPICS: Topic[] = [
       'Intractability of exact inference',
       'Particle filtering',
       'Sample → weight → resample',
-    ],    status: 'coming-soon',
+    ],
+    status: 'available',
+    Component: lazy(() => import('./topic08-particle-filter')),
   },
   {
     num: 9,

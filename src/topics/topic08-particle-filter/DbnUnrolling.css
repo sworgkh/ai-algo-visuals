@@ -1,0 +1,118 @@
+.dbn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.dbn-eknob {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--surface-3, #232a3d);
+  border: 1px solid var(--border-strong);
+}
+
+.dbn-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.dbn-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 220px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.dbn-slider .mono {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+.dbn-slider input {
+  width: 100%;
+  accent-color: var(--brand-500);
+}
+.dbn-seg {
+  display: inline-flex;
+  padding: 3px;
+  gap: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.dbn-seg button {
+  padding: 6px 13px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.dbn-seg button.is-on {
+  background: var(--brand-500);
+  color: var(--text-on);
+  font-weight: 650;
+}
+
+.dbn-canvas-wrap {
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+}
+.dbn-canvas {
+  width: 100%;
+  min-width: 520px;
+  height: auto;
+}
+
+.dbn-edge {
+  stroke-width: 2;
+  fill: none;
+}
+.dbn-edge--inter {
+  stroke: var(--viz-3);
+}
+.dbn-edge--intra {
+  stroke: var(--viz-5);
+  stroke-dasharray: 5 4;
+}
+.dbn-node circle {
+  fill: var(--surface-2);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+.dbn-node.is-ev circle {
+  fill: var(--surface-3, #232a3d);
+  stroke: var(--viz-5);
+}
+.dbn-node-label {
+  fill: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+}
+.dbn-sub {
+  fill: var(--text-muted);
+}
+.dbn-slice-label {
+  fill: var(--text-muted);
+  font-size: 12px;
+}
+
+.dbn-note {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.dbn-note strong {
+  color: var(--text-strong);
+}
