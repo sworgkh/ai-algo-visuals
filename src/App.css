@@ -7,13 +7,12 @@
 .app-content {
   flex: 1;
   min-width: 0;
-  padding: var(--space-7) var(--space-7) var(--space-8);
+  /* Narrow gutter so the content fills its section — plenty of room for visuals. */
+  padding: 40px;
 }
 
 .app-content-inner {
   width: 100%;
-  max-width: var(--content-max);
-  margin: 0 auto;
 }
 
 .route-loading {
@@ -26,6 +25,6 @@
 
 @media (max-width: 720px) {
   .app-content {
-    padding: var(--space-5) var(--space-4) var(--space-7);
+    padding: 20px 16px 40px;
   }
 }
