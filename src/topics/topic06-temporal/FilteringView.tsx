@@ -115,11 +115,15 @@ export function FilteringView() {
         <div className="flt-deriv-body">
           <div className="flt-deriv-line">
             <span className="flt-deriv-tag flt-deriv-tag--predict">1 · predict</span>
-            <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
+            <div className="flt-deriv-anim" key={deriv.predict}>
+              <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
+            </div>
           </div>
           <div className="flt-deriv-line">
             <span className="flt-deriv-tag flt-deriv-tag--update">2 · update</span>
-            <FormulaBlock tex={deriv.update} ariaLabel="sensor update and normalization with numbers" />
+            <div className="flt-deriv-anim" key={deriv.update}>
+              <FormulaBlock tex={deriv.update} ariaLabel="sensor update and normalization with numbers" />
+            </div>
           </div>
         </div>
       </details>

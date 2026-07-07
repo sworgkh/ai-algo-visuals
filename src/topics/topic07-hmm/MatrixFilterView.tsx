@@ -139,15 +139,21 @@ export function MatrixFilterView() {
         <div className="mf-deriv-body">
           <div className="mf-deriv-line">
             <span className="mf-deriv-tag mf-deriv-tag--predict">1 · predict</span>
-            <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
+            <div className="mf-deriv-anim" key={deriv.predict}>
+              <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
+            </div>
           </div>
           <div className="mf-deriv-line">
             <span className="mf-deriv-tag mf-deriv-tag--sensor">2 · update</span>
-            <FormulaBlock tex={deriv.update} ariaLabel="sensor update expansion with numbers" />
+            <div className="mf-deriv-anim" key={deriv.update}>
+              <FormulaBlock tex={deriv.update} ariaLabel="sensor update expansion with numbers" />
+            </div>
           </div>
           <div className="mf-deriv-line">
             <span className="mf-deriv-tag mf-deriv-tag--alpha">3 · normalize</span>
-            <FormulaBlock tex={deriv.normalize} ariaLabel="normalization expansion with numbers" />
+            <div className="mf-deriv-anim" key={deriv.normalize}>
+              <FormulaBlock tex={deriv.normalize} ariaLabel="normalization expansion with numbers" />
+            </div>
           </div>
         </div>
       </details>
