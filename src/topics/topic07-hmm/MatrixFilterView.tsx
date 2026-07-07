@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { matrixFilter } from '@/lib/hmmMatrix'
+import { type MatrixFilterStep, matrixFilter } from '@/lib/hmmMatrix'
 import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
 import { FormulaBlock } from '@/components/FormulaBlock'
@@ -37,6 +37,7 @@ export function MatrixFilterView() {
     UMBRELLA_HMM.states.map((_, j) => (i === j ? UMBRELLA_HMM.sensor[s][obs[day]] : 0)),
   )
   const reached = (p: Phase) => PHASES.indexOf(p) <= PHASES.indexOf(phase)
+  const deriv = buildDerivation(fIn, m.Tt, O, step)
 
   const caption =
     phase === 'trans'
@@ -130,6 +131,27 @@ export function MatrixFilterView() {
         </div>
       </div>
 
+      <details className="mf-deriv">
+        <summary>
+          <span className="mf-deriv-caret" aria-hidden>▶</span>
+          Show the full calculation for day {day + 1} — every number plugged in
+        </summary>
+        <div className="mf-deriv-body">
+          <div className="mf-deriv-line">
+            <span className="mf-deriv-tag mf-deriv-tag--predict">1 · predict</span>
+            <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
+          </div>
+          <div className="mf-deriv-line">
+            <span className="mf-deriv-tag mf-deriv-tag--sensor">2 · update</span>
+            <FormulaBlock tex={deriv.update} ariaLabel="sensor update expansion with numbers" />
+          </div>
+          <div className="mf-deriv-line">
+            <span className="mf-deriv-tag mf-deriv-tag--alpha">3 · normalize</span>
+            <FormulaBlock tex={deriv.normalize} ariaLabel="normalization expansion with numbers" />
+          </div>
+        </div>
+      </details>
+
       <StepPlayer player={player} stepLabel={`Day ${day + 1} · ${phase}`} caption={caption} />
     </div>
   )
@@ -139,4 +161,46 @@ function allCells(n: number): Set<string> {
   const s = new Set<string>()
   for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) s.add(`${r},${c}`)
   return s
+}
+
+const fM = (n: number) => n.toFixed(2)
+const fV = (n: number) => n.toFixed(3)
+const bvec = (a: number, b: number) => String.raw`\begin{bmatrix} ${fV(a)} \\ ${fV(b)} \end{bmatrix}`
+
+interface Derivation {
+  predict: string
+  update: string
+  normalize: string
+}
+
+/** The full worked expansion of one filtering step with the actual numbers. */
+function buildDerivation(
+  fIn: number[],
+  Tt: number[][],
+  O: number[][],
+  step: MatrixFilterStep,
+): Derivation {
+  const [a, b] = fIn
+  const [p1, p2] = step.predicted
+  const [w1, w2] = step.weighted
+  const [u1, u2] = step.updated
+  const s1 = O[0][0]
+  const s2 = O[1][1]
+  const Z = w1 + w2
+
+  const predict = String.raw`\mathbf{T}^{\top}\mathbf{f}_t
+    = \begin{bmatrix} ${fM(Tt[0][0])} & ${fM(Tt[0][1])} \\ ${fM(Tt[1][0])} & ${fM(Tt[1][1])} \end{bmatrix}\!${bvec(a, b)}
+    = \begin{bmatrix} ${fM(Tt[0][0])}(${fV(a)}) + ${fM(Tt[0][1])}(${fV(b)}) \\ ${fM(Tt[1][0])}(${fV(a)}) + ${fM(Tt[1][1])}(${fV(b)}) \end{bmatrix}
+    = ${bvec(p1, p2)}`
+
+  const update = String.raw`\mathbf{O}_e\,(\mathbf{T}^{\top}\mathbf{f}_t)
+    = \begin{bmatrix} ${fM(s1)} & 0 \\ 0 & ${fM(s2)} \end{bmatrix}\!${bvec(p1, p2)}
+    = \begin{bmatrix} ${fM(s1)}(${fV(p1)}) \\ ${fM(s2)}(${fV(p2)}) \end{bmatrix}
+    = ${bvec(w1, w2)}`
+
+  const normalize = String.raw`\alpha = \frac{1}{${fV(w1)} + ${fV(w2)}} = \frac{1}{${fV(Z)}} = ${fV(step.alpha)}
+    \qquad
+    \mathbf{f}_{t+1} = \alpha\!${bvec(w1, w2)} = ${bvec(u1, u2)}`
+
+  return { predict, update, normalize }
 }
