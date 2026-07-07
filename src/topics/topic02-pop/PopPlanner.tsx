@@ -15,6 +15,7 @@ import {
 } from '@/lib/pop'
 import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
+import { VizGuide } from '@/components/VizGuide'
 import { PopCanvas } from './PopCanvas'
 import { OperatorCard } from './OperatorCard'
 import { ProblemStrip } from './StaticBlocks'
@@ -26,15 +27,21 @@ type Mode = 'guided' | 'free'
 
 const initialState = new Set(INITIAL)
 
-function Legend() {
-  return (
-    <div className="pp-legend">
-      <span><i className="lg lg--link" /> causal link</span>
-      <span><i className="lg lg--order" /> ordering</span>
-      <span><i className="lg lg--threat" /> threat</span>
-      <span><i className="lg lg--open" /> open precond</span>
-    </div>
-  )
+const POP_GUIDE = {
+  what: (
+    <>
+      A <strong>partial-order plan</strong>: boxes are steps (Start’s effects are the initial
+      state; Finish’s preconditions are the goal). A violet <strong>causal link</strong> protects
+      one literal from a producer to its consumer; grey arrows are <strong>ordering</strong>{' '}
+      constraints. A <strong>threat</strong> is a step that would delete a protected literal.
+    </>
+  ),
+  legend: [
+    { color: 'var(--violet-400)', label: 'causal link (protects a literal)' },
+    { color: 'var(--border-strong)', label: 'ordering constraint' },
+    { color: 'var(--danger)', label: 'threat' },
+    { color: 'var(--warning)', label: 'open precondition' },
+  ],
 }
 
 function StepAnnotation({ plan, id }: { plan: Plan; id: string | null }) {
@@ -127,9 +134,7 @@ function GuidedMode({
               <Agenda plan={plan} />
             </>
           )}
-          <StepAnnotation plan={plan} id={selectedStep ?? step.focusStep ?? null} />
-          <Legend />
-        </aside>
+          <StepAnnotation plan={plan} id={selectedStep ?? step.focusStep ?? null} />        </aside>
       </div>
       <StepPlayer player={player} stepLabel={step.title} caption={step.caption} />
     </>
@@ -294,9 +299,7 @@ function FreeMode({
               </ul>
             </div>
           )}
-          <StepAnnotation plan={plan} id={selectedStep} />
-          <Legend />
-        </aside>
+          <StepAnnotation plan={plan} id={selectedStep} />        </aside>
       </div>
       <div className="pp-free-footer">
         <p className="pp-hint">
@@ -321,6 +324,11 @@ export function PopPlanner() {
 
   return (
     <div className="pop-planner">
+      <VizGuide
+        what={POP_GUIDE.what}
+        how="Guided: step through the construction; at a threat, choose promote or demote (and see why the wrong one fails). Free play: click an open precondition to achieve it, then clear any threats."
+        legend={POP_GUIDE.legend}
+      />
       <div className="pp-modes" role="tablist" aria-label="POP mode">
         <button
           className={`pp-mode${mode === 'guided' ? ' is-active' : ''}`}

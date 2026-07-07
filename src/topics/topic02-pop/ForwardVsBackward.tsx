@@ -4,6 +4,7 @@ import type { Action, Fluent } from '@/lib/strips'
 import { applicableActions, relevantActions } from '@/lib/strips'
 import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
+import { VizGuide } from '@/components/VizGuide'
 import { StaticBlocks } from './StaticBlocks'
 import { GOAL_STATE, INITIAL_STATE } from './blocksState'
 import { GOAL, GROUND_ACTIONS, INITIAL } from './domain'
@@ -162,6 +163,22 @@ export function ForwardVsBackward() {
   return (
     <div className="forward-backward">
       <ConceptCard />
+
+      <VizGuide
+        what={
+          <>
+            Two searches on the <em>same</em> problem. <strong>Forward</strong> (progression) starts
+            at the initial state and expands <em>every applicable</em> action.{' '}
+            <strong>Backward</strong> (regression) starts at the goal and expands <em>only
+            relevant</em> ones — that difference is the branching factor each pays.
+          </>
+        }
+        how="Step to expand one level of each search, then compare how many actions each considers."
+        legend={[
+          { color: '#8b5cf6', label: 'relevant to the goal' },
+          { color: 'var(--surface-4)', label: 'applicable but goal-irrelevant (forward only)' },
+        ]}
+      />
 
       <div className="fb-cols">
         <SearchColumn

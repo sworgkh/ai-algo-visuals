@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { Action, Fluent } from '@/lib/strips'
 import { regress, relevantActions } from '@/lib/strips'
+import { VizGuide } from '@/components/VizGuide'
 import { OperatorCard } from './OperatorCard'
 import { ProblemStrip } from './StaticBlocks'
 import { GOAL, GROUND_ACTIONS, INITIAL } from './domain'
@@ -36,12 +37,22 @@ export function Regression() {
 
   return (
     <div className="regression">
-      <p className="rg-intro">
-        Backward search starts at the goal and works towards the initial state. At each step it
-        picks a <strong>relevant</strong> action — one that achieves a needed literal without
-        deleting another — and <strong>regresses</strong> the goal:{' '}
-        <span className="mono">G' = (G − add) ∪ precond</span>. Only relevant actions ever appear.
-      </p>
+      <VizGuide
+        what={
+          <>
+            Backward search starts at the <strong>goal</strong> and works toward the initial state.
+            Each step picks a <strong>relevant</strong> action — one that achieves a needed literal
+            without deleting another — and <strong>regresses</strong> the goal:{' '}
+            <span className="mono">G' = (G − add) ∪ precond</span>. Only relevant actions ever
+            appear.
+          </>
+        }
+        how="Click a relevant action to regress the goal set; keep going until every literal already holds in the initial state."
+        legend={[
+          { color: 'var(--success)', label: 'literal already holds in the initial state' },
+          { color: 'var(--surface-4)', label: 'still to be achieved' },
+        ]}
+      />
 
       <ProblemStrip />
 

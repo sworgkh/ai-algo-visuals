@@ -4,6 +4,7 @@ import { apply, applicableActions } from '@/lib/strips'
 import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
 import { Blocks } from '@/components/Icons'
+import { VizGuide } from '@/components/VizGuide'
 import { BlocksView } from './BlocksView'
 import { OperatorCard } from './OperatorCard'
 import { StaticBlocks } from './StaticBlocks'
@@ -183,11 +184,21 @@ export function StripsForward() {
   const [mode, setMode] = useState<ScenarioKey | 'free'>('interleaved')
   return (
     <div className="strips-forward">
-      <p className="sf-intro">
-        A STRIPS action fires only when its <em>preconditions</em> hold; it then{' '}
-        <span className="sf-del">deletes</span> and <span className="sf-add">adds</span> literals.
-        Try each goal ordering — both single-goal-first plans dead-end; only interleaving works.
-      </p>
+      <VizGuide
+        what={
+          <>
+            A STRIPS action fires only when its <em>preconditions</em> hold; it then{' '}
+            <span className="sf-del">deletes</span> and <span className="sf-add">adds</span>{' '}
+            literals. The stacks show the world state; the card shows the current action’s
+            precond / add / delete.
+          </>
+        }
+        how="Try each goal ordering — both single-goal-first plans dead-end; only interleaving works. Or Free-build your own. Click Goal to preview the target arrangement."
+        legend={[
+          { color: 'var(--success)', label: 'added literal' },
+          { color: 'var(--danger)', label: 'deleted literal' },
+        ]}
+      />
       <div className="sf-modes">
         {(Object.keys(SCENARIOS) as ScenarioKey[]).map((k) => (
           <button
