@@ -1,0 +1,116 @@
+.sm10 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.sm10-top {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: var(--space-4);
+  align-items: stretch;
+}
+@media (max-width: 720px) {
+  .sm10-top {
+    grid-template-columns: 1fr;
+  }
+}
+.sm10-chart {
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.sm10-chart svg {
+  width: 100%;
+  height: auto;
+}
+.sm10-axis {
+  stroke: var(--border-strong);
+}
+.sm10-curve {
+  fill: none;
+  stroke: var(--viz-4);
+  stroke-width: 2.5;
+}
+.sm10-min {
+  fill: var(--viz-4);
+}
+.sm10-min-label {
+  fill: var(--text-secondary);
+  font-size: 11px;
+}
+.sm10-cur {
+  stroke: var(--brand-400);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+.sm10-axlabel {
+  fill: var(--text-muted);
+  font-size: 11px;
+}
+
+.sm10-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  justify-content: center;
+}
+.sm10-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.sm10-slider .mono {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+.sm10-slider input {
+  width: 100%;
+  accent-color: var(--brand-500);
+}
+.sm10-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.sm10-stat-lbl {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.sm10-stat-num {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+.sm10-stat-num.is-inf {
+  color: var(--danger, #f87171);
+}
+
+.sm10-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3);
+}
+.sm10-method {
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+.sm10-method-name {
+  font-size: var(--text-sm);
+  font-weight: 650;
+  color: var(--text-strong);
+}
+.sm10-method p {
+  margin: 4px 0 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}

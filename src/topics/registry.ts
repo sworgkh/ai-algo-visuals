@@ -177,7 +177,9 @@ export const TOPICS: Topic[] = [
       'Chain rule vs. bigram trap',
       'Perplexity',
       'Laplace / backoff / interpolation',
-    ],    status: 'coming-soon',
+    ],
+    status: 'available',
+    Component: lazy(() => import('./topic10-language-models')),
   },
 ]
 

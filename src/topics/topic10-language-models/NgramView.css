@@ -1,0 +1,113 @@
+.ng {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.ng-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.ng-ctx {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.ng-ctx-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.ng-ctx-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ng-chip {
+  padding: 5px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.ng-chip:hover {
+  border-color: var(--border-strong);
+}
+.ng-chip.is-on {
+  background: var(--brand-500);
+  border-color: var(--brand-500);
+  color: var(--text-on);
+  font-weight: 650;
+}
+.ng-alpha {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 340px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.ng-alpha .mono {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+.ng-alpha input {
+  width: 100%;
+  accent-color: var(--brand-500);
+}
+
+.ng-dist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.ng-dist-head {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+}
+.ng-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 60px 44px;
+  gap: var(--space-3);
+  align-items: center;
+}
+.ng-word {
+  font-size: var(--text-sm);
+  color: var(--text-strong);
+  text-align: right;
+}
+.ng-bar-track {
+  height: 16px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.ng-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-400), var(--brand-500));
+  border-radius: var(--radius-sm);
+  transition: width 0.3s var(--ease-out);
+  min-width: 2px;
+}
+.ng-p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: right;
+}
+.ng-count {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-align: right;
+}
+.ng-more {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  padding-left: 100px;
+}
