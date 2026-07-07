@@ -149,7 +149,7 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 ### Phase 1 — Topics (ONE AT A TIME, USER-TRIGGERED ONLY)
 - [ ] Topic 1: Search Foundations
 - [x] Topic 2: Planning, STRIPS & POP ⭐
-- [ ] Topic 3: Real-World Planning (critical path!) 
+- [x] Topic 3: Real-World Planning (critical path!) 
 - [ ] Topic 4: Uncertainty & Probability
 - [ ] Topic 5: Bayesian Networks ⭐
 - [ ] Topic 6: Temporal Models (umbrella world!)
@@ -179,6 +179,8 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 - **Phase 0 — Foundation.** Scaffolded Vite + React 19 + TS. Shell: collapsible `Sidebar` (reads a single `topics/registry.ts`), `App` layout, `Home` (course/exam overview + topic grid + live per-term formula showcase), `ComingSoon`/`NotFound`, `TopicRoute` dispatcher. Shared primitives: `FormulaBlock` (KaTeX + `term()` per-term highlight), `useStepPlayer` hook + `StepPlayer` control (keyboard: ←/→/Space/Home), `BarPair`/`BarStack`, `lib/graph.ts` edge geometry. Dark blue/purple design tokens. Python `scripts/` skeleton + `npm run gen`. All 10 topics greyed as coming-soon. `npm run build` verified.
 
 - **Topic 2 — Planning, STRIPS & POP** (exam Part B). Domain: **Sussman anomaly** (blocks world, Move/MoveToTable). Correctness-first: pure engine in `src/lib/strips.ts` (grounding, forward apply, regression, relevance) + `src/lib/pop.ts` (plan, ordering/cycle logic, threat detection, promotion/demotion, linearize-then-simulate validator), covered by **Vitest** (`src/lib/planning.test.ts`, 8 tests) asserting the interleaved plan reaches the goal, both goal-first orderings dead-end, and the guided derivation is complete/valid with exactly the two `Clear(C)`/`Clear(B)` demotion threats. Four tabs (deep-linkable via `?tab=`/`?step=`): **POP Planner** (guided step-through + free play; interactive promote/demote; SVG canvas with causal links, open-precond agenda, flashing threats), **STRIPS forward** (blocks-world animation, add/delete chips, both goal-first orderings hit dead-ends), **Regression** (backward goal transform), and **Forward vs. Backward** (the "backward search can be more efficient" T/F exam item: side-by-side search fan-out, forward's goal-irrelevant actions dimmed, honest branching counts + the set-based-heuristics caveat). Registry-driven lazy chunk. Added `?tab`/`?step` deep-linking + `useStepPlayer` `initialIndex`.
+
+- **Topic 3 — Planning in the Real World.** Tested CPM engine in `src/lib/cpm.ts` (forward ES/EF, backward LS/LF, slack, critical path, cycle detection) covered by `src/lib/cpm.test.ts` against the AIMA car-assembly values (project duration 85; critical path AddEngine2→AddWheels2→Inspect; AddEngine1/AddWheels1 slack 15). Three tabs: **Critical-path lab** (activity-node DAG with ES│EF/LS│LF, editable durations, Gantt with hatched slack, forward-then-backward step-through with the arithmetic in captions; `?step` deep-link), **HTN decomposition** (click a refinement to expand an HLA down to primitives — AIMA "Go(Home,SFO)"), and **Resources** (reusable robot vs. consumable bolts, stepped). Registry-driven lazy chunk. Exam framing kept out (matches the earlier strip).
 
 ### Decisions
 - **Animation engine: Framer Motion + d3 (Remotion deferred).** Interactive step-through is the exam skill (user-controlled state), which Framer Motion + d3 layout serve best; Remotion's build-time video shines for non-interactive intros and can be added per-topic later without disturbing the static build.

@@ -1,0 +1,108 @@
+.htn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.htn-intro {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  max-width: 78ch;
+}
+.htn-tree {
+  padding: var(--space-5);
+  background:
+    radial-gradient(600px 300px at 25% 0%, #8b5cf60d, transparent 70%),
+    var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.htn-node-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.htn-node {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  align-self: flex-start;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-default);
+  background: var(--surface-2);
+}
+.htn-node.is-hla {
+  border-color: #8b5cf655;
+  background: #8b5cf614;
+}
+.htn-node.is-prim {
+  border-color: #34d39944;
+  background: var(--success-dim);
+}
+.htn-tag {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+}
+.htn-node.is-hla .htn-tag {
+  color: var(--violet-300);
+  background: #8b5cf629;
+}
+.htn-node.is-prim .htn-tag {
+  color: var(--success);
+  background: #34d39929;
+}
+.htn-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.htn-refs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding-left: var(--space-4);
+}
+.htn-refs-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.htn-ref-btn {
+  padding: 5px 12px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  background: var(--surface-2);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+  transition: border-color var(--dur-fast), color var(--dur-fast), background-color var(--dur-fast);
+}
+.htn-ref-btn:hover {
+  color: var(--text-strong);
+  border-color: var(--border-strong);
+}
+.htn-ref-btn.is-active {
+  color: var(--violet-300);
+  background: #8b5cf61f;
+  border-color: #8b5cf666;
+}
+
+/* children indented with a connector rail */
+.htn-children {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-left: var(--space-5);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--border-strong);
+}

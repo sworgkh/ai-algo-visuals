@@ -1,0 +1,120 @@
+.res {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.res-intro {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  max-width: 80ch;
+}
+.res-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+@media (max-width: 720px) {
+  .res-cards {
+    grid-template-columns: 1fr;
+  }
+}
+.res-card {
+  padding: var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.res-card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.res-card-head h3 {
+  font-size: var(--text-md);
+  margin: 0;
+}
+.res-kind {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+}
+.res-kind--reuse {
+  color: var(--brand-300);
+  background: #6366f11f;
+  border: 1px solid var(--border-brand);
+}
+.res-kind--consume {
+  color: var(--warning);
+  background: var(--warning-dim);
+  border: 1px solid #fbbf2440;
+}
+
+/* reusable slots */
+.res-slot-row {
+  display: flex;
+  gap: var(--space-2);
+  min-height: 64px;
+}
+.res-slot {
+  flex: 1;
+  min-height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-strong);
+  background: var(--bg-0);
+  transition: background-color var(--dur-med) var(--ease-out), border-color var(--dur-med) var(--ease-out);
+}
+.res-slot.is-busy {
+  border-style: solid;
+  border-color: var(--border-brand);
+  background: linear-gradient(180deg, #6366f126, #6366f10f);
+}
+.res-slot-op {
+  font-size: var(--text-sm);
+  font-weight: 650;
+  color: var(--text-strong);
+}
+.res-slot-free {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* consumable meter */
+.res-meter {
+  position: relative;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.res-meter-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: linear-gradient(180deg, var(--warning), #d99613);
+  box-shadow: inset 0 1px 0 #ffffff33;
+}
+.res-meter-value {
+  position: relative;
+  margin-left: auto;
+  margin-right: var(--space-3);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--text-strong);
+  z-index: 1;
+}
+
+.res-note {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}

@@ -67,7 +67,9 @@ export const TOPICS: Topic[] = [
       'Critical path (ES / LS / slack)',
       'Reusable vs. consumable resources',
       'Conformant / contingent / online',
-    ],    status: 'coming-soon',
+    ],
+    status: 'available',
+    Component: lazy(() => import('./topic03-real-world-planning')),
   },
   {
     num: 4,
