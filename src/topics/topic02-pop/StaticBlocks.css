@@ -1,0 +1,80 @@
+.static-blocks {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3px;
+}
+.sb-scene {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  min-height: 40px;
+}
+.sb-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.sb-block {
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  color: #0d0f16;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  box-shadow: inset 0 1px 0 #ffffff40, var(--shadow-sm);
+}
+.sb-table {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--surface-4);
+}
+
+/* sizes */
+.sb-md .sb-block {
+  width: 34px;
+  height: 26px;
+  font-size: 13px;
+}
+.sb-sm .sb-block {
+  width: 26px;
+  height: 21px;
+  font-size: 11px;
+}
+.sb-sm .sb-scene {
+  gap: 7px;
+  min-height: 30px;
+}
+
+/* Initial → Goal strip */
+.problem-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.ps-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.ps-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.ps-arrow {
+  font-size: var(--text-xl);
+  color: var(--text-muted);
+  align-self: center;
+  padding-top: 12px;
+}

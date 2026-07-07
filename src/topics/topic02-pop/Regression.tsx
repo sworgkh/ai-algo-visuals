@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import type { Action, Fluent } from '@/lib/strips'
 import { regress, relevantActions } from '@/lib/strips'
 import { OperatorCard } from './OperatorCard'
+import { ProblemStrip } from './StaticBlocks'
 import { GOAL, GROUND_ACTIONS, INITIAL } from './domain'
 import './Regression.css'
 
@@ -41,6 +42,8 @@ export function Regression() {
         deleting another — and <strong>regresses</strong> the goal:{' '}
         <span className="mono">G' = (G − add) ∪ precond</span>. Only relevant actions ever appear.
       </p>
+
+      <ProblemStrip />
 
       <div className="rg-main">
         <div className="rg-goalbox">

@@ -99,6 +99,13 @@ export const Sparkles = (p: IconProps) => (
     <path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8z" fill="currentColor" stroke="none" />
   </Base>
 )
+export const Blocks = (p: IconProps) => (
+  <Base {...p}>
+    <rect x="8.5" y="3.5" width="7" height="7" rx="1.2" />
+    <rect x="3.5" y="13.5" width="7" height="7" rx="1.2" />
+    <rect x="13.5" y="13.5" width="7" height="7" rx="1.2" />
+  </Base>
+)
 export const Graph = (p: IconProps) => (
   <Base {...p}>
     <circle cx="6" cy="7" r="2.5" />

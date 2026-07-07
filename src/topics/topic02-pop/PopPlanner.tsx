@@ -17,6 +17,7 @@ import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
 import { PopCanvas } from './PopCanvas'
 import { OperatorCard } from './OperatorCard'
+import { ProblemStrip } from './StaticBlocks'
 import { buildGuidedTrace } from './guided'
 import { GOAL, GROUND_ACTIONS, INITIAL } from './domain'
 import './PopPlanner.css'
@@ -338,6 +339,7 @@ export function PopPlanner() {
           Free play
         </button>
       </div>
+      <ProblemStrip className="pp-problem" />
       {mode === 'guided' ? (
         <GuidedMode
           selectedStep={selectedStep}

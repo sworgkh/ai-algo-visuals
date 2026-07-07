@@ -4,6 +4,8 @@ import type { Action, Fluent } from '@/lib/strips'
 import { applicableActions, relevantActions } from '@/lib/strips'
 import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
+import { StaticBlocks } from './StaticBlocks'
+import { GOAL_STATE, INITIAL_STATE } from './blocksState'
 import { GOAL, GROUND_ACTIONS, INITIAL } from './domain'
 import './ForwardVsBackward.css'
 
@@ -60,12 +62,14 @@ function SearchColumn({
   kind,
   rootLabel,
   rootSub,
+  rootState,
   children,
   expanded,
 }: {
   kind: 'forward' | 'backward'
   rootLabel: string
   rootSub: string
+  rootState: ReadonlySet<Fluent>
   children: Child[]
   expanded: boolean
 }) {
@@ -84,6 +88,7 @@ function SearchColumn({
       <div className="fb-tree">
         <div className="fb-root">
           <span className="fb-root-label">{rootLabel}</span>
+          <StaticBlocks state={rootState} size="sm" />
           <span className="fb-root-sub mono">{rootSub}</span>
         </div>
 
@@ -163,6 +168,7 @@ export function ForwardVsBackward() {
           kind="forward"
           rootLabel="Initial state"
           rootSub="On(C,A), On(A,Table), On(B,Table), Clear(C), Clear(B)"
+          rootState={INITIAL_STATE}
           children={forwardChildren}
           expanded={expanded}
         />
@@ -170,6 +176,7 @@ export function ForwardVsBackward() {
           kind="backward"
           rootLabel="Goal"
           rootSub="On(A,B) ∧ On(B,C)"
+          rootState={GOAL_STATE}
           children={backwardChildren}
           expanded={expanded}
         />

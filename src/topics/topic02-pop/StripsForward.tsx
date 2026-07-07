@@ -1,10 +1,13 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Action, Fluent } from '@/lib/strips'
 import { apply, applicableActions } from '@/lib/strips'
 import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
+import { Blocks } from '@/components/Icons'
 import { BlocksView } from './BlocksView'
 import { OperatorCard } from './OperatorCard'
+import { StaticBlocks } from './StaticBlocks'
+import { GOAL_STATE } from './blocksState'
 import { GOAL, GROUND_ACTIONS, INITIAL, actionByName } from './domain'
 import './StripsForward.css'
 
@@ -51,14 +54,41 @@ const SCENARIOS: Record<string, { label: string; verdict: 'good' | 'bad'; names:
 type ScenarioKey = keyof typeof SCENARIOS
 
 function GoalChips({ state }: { state: ReadonlySet<Fluent> }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', onDoc)
+    return () => document.removeEventListener('mousedown', onDoc)
+  }, [open])
+
   return (
-    <div className="sf-goal">
-      <span className="sf-goal-label">Goal</span>
+    <div className="sf-goal" ref={ref}>
+      <button
+        className={`sf-goal-btn${open ? ' is-open' : ''}`}
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        title="Show the goal arrangement"
+      >
+        <Blocks size={15} />
+        Goal
+      </button>
       {GOAL.map((g) => (
         <span key={g} className={`sf-goal-chip mono${state.has(g) ? ' is-met' : ''}`}>
           {state.has(g) ? '✓' : '○'} {g}
         </span>
       ))}
+      {open && (
+        <div className="sf-goal-pop" role="tooltip">
+          <div className="sf-goal-pop-title">Goal arrangement</div>
+          <StaticBlocks state={GOAL_STATE} />
+          <div className="sf-goal-pop-formula mono">{GOAL.join(' ∧ ')}</div>
+        </div>
+      )}
     </div>
   )
 }
