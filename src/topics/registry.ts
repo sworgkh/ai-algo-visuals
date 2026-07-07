@@ -161,7 +161,9 @@ export const TOPICS: Topic[] = [
       'Pipeline vs. end-to-end',
       'Tokenization / lemmatization / stemming',
       'Zipf’s law & OOV',
-    ],    status: 'coming-soon',
+    ],
+    status: 'available',
+    Component: lazy(() => import('./topic09-nlp')),
   },
   {
     num: 10,

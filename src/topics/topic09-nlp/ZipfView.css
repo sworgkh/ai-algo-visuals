@@ -1,0 +1,107 @@
+.zf {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.zf-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: var(--space-4);
+}
+.zf-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.zf-panel-title {
+  font-size: var(--text-sm);
+  font-weight: 650;
+  color: var(--text-strong);
+}
+.zf-svg {
+  width: 100%;
+  height: auto;
+}
+.zf-axis {
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+.zf-guide {
+  stroke: var(--border-subtle);
+  stroke-dasharray: 3 3;
+}
+.zf-ideal {
+  stroke: var(--viz-5);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  opacity: 0.8;
+}
+.zf-dot {
+  fill: var(--brand-500);
+  stroke: var(--brand-400);
+  stroke-width: 0.5;
+}
+.zf-axlabel {
+  fill: var(--text-muted);
+  font-size: 11px;
+}
+.zf-curve {
+  fill: none;
+  stroke: var(--viz-4);
+  stroke-width: 2.5;
+}
+.zf-marker {
+  stroke: var(--brand-400);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+.zf-marker-dot {
+  fill: var(--brand-400);
+}
+.zf-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.zf-slider .mono {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+.zf-slider input {
+  width: 100%;
+  accent-color: var(--brand-500);
+}
+.zf-readout {
+  display: flex;
+  gap: var(--space-3);
+}
+.zf-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.zf-stat-num {
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+.zf-stat--cov .zf-stat-num {
+  color: var(--viz-4);
+}
+.zf-stat--oov .zf-stat-num {
+  color: var(--warning, #fbbf24);
+}
+.zf-stat-lbl {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
