@@ -129,7 +129,9 @@ export const TOPICS: Topic[] = [
       'Matrix filtering / smoothing',
       'Matrix Viterbi',
       'Mega-variable blowup',
-    ],    status: 'coming-soon',
+    ],
+    status: 'available',
+    Component: lazy(() => import('./topic07-hmm')),
   },
   {
     num: 8,

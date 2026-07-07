@@ -1,0 +1,196 @@
+.mv2 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.mv2-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.mv2-days {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.mv2-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 5px 13px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.mv2-day:hover {
+  border-color: var(--border-strong);
+}
+.mv2-day.is-umb {
+  background: #6366f114;
+}
+.mv2-day.is-current {
+  border-color: var(--border-brand);
+  box-shadow: var(--glow-brand-soft);
+}
+.mv2-day-n {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.mv2-day-icon {
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+
+.mv2-mode {
+  display: inline-flex;
+  padding: 3px;
+  gap: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.mv2-mode button {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.mv2-mode button.is-on {
+  background: var(--brand-500);
+  color: var(--text-on);
+  font-weight: 650;
+}
+
+.mv2-base {
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.mv2-base p {
+  margin: 0 0 var(--space-3);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+.mv2-msg {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.mv2-msg-cell {
+  padding: 6px 12px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+}
+
+.mv2-targets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+.mv2-card {
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.mv2-card-head {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.mv2-card-head strong {
+  color: var(--text-strong);
+}
+.mv2-prods {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mv2-prod {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 10px;
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+}
+.mv2-prod.is-winner {
+  border-color: var(--viz-4);
+  background: color-mix(in srgb, var(--viz-4) 14%, var(--surface-2));
+}
+.mv2-prod-src {
+  color: var(--text-muted);
+  min-width: 78px;
+}
+.mv2-prod-calc {
+  color: var(--text-primary);
+}
+.mv2-prod-arrow {
+  margin-left: auto;
+  color: var(--viz-4);
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+.mv2-reduce {
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--border-subtle);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.mv2-reduce-op {
+  display: inline-block;
+  min-width: 34px;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+.mv2-card--max .mv2-reduce-op {
+  color: var(--viz-4);
+}
+.mv2-card--sum .mv2-reduce-op {
+  color: var(--brand-400);
+}
+.mv2-reduce-sensor strong {
+  color: var(--text-strong);
+}
+
+.mv2-path {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  padding: var(--space-3) var(--space-4);
+  background: color-mix(in srgb, var(--viz-4) 8%, var(--surface-1));
+  border: 1px solid color-mix(in srgb, var(--viz-4) 30%, var(--border-default));
+  border-radius: var(--radius-md);
+}
+.mv2-path-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.mv2-path-node {
+  color: var(--text-strong);
+  font-weight: 650;
+}
+.mv2-path-arrow {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.mv2-path-done {
+  color: var(--viz-4);
+  font-size: var(--text-sm);
+  font-weight: 650;
+}

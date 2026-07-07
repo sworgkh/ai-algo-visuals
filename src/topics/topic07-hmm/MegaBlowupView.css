@@ -1,0 +1,107 @@
+.mb {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.mb-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 360px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+.mb-slider-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.mb-slider-top .mono {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+.mb-slider input {
+  width: 100%;
+  accent-color: var(--brand-500);
+}
+
+.mb-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+}
+.mb-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.mb-stat-value {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+.mb-stat-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.mb-stat--warn {
+  border-color: color-mix(in srgb, var(--warning, #fbbf24) 45%, var(--border-subtle));
+}
+.mb-stat--warn .mb-stat-value {
+  color: var(--warning, #fbbf24);
+}
+.mb-stat--good {
+  border-color: color-mix(in srgb, var(--viz-4) 45%, var(--border-subtle));
+}
+.mb-stat--good .mb-stat-value {
+  color: var(--viz-4);
+}
+
+.mb-compare {
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.mb-big {
+  color: var(--warning, #fbbf24);
+}
+.mb-small {
+  color: var(--viz-4);
+}
+
+.mb-grid-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: auto;
+}
+.mb-grid-caption {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.mb-grid {
+  display: grid;
+  gap: 1px;
+}
+.mb-cell {
+  width: var(--cell);
+  height: var(--cell);
+  background: var(--brand-500);
+  border-radius: 1px;
+}
