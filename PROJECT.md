@@ -151,7 +151,7 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 - [x] Topic 2: Planning, STRIPS & POP ⭐
 - [x] Topic 3: Real-World Planning (critical path!) 
 - [x] Topic 4: Uncertainty & Probability
-- [ ] Topic 5: Bayesian Networks ⭐
+- [x] Topic 5: Bayesian Networks ⭐
 - [ ] Topic 6: Temporal Models (umbrella world!)
 - [ ] Topic 7: HMM ⭐
 - [ ] Topic 8: DBN & Particle Filtering
@@ -184,6 +184,8 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 
 - **Topic 4 — Quantifying Uncertainty.** Tested probability engine `src/lib/probability.ts` (enumeration/marginals/conditional prob, Bayes diagnostic, param counts) + `probability.test.ts` on the AIMA dentist joint (P(cavity|toothache)=⟨0.6,0.4⟩; Toothache⊥Catch|Cavity=0.9; base-rate posterior 8.7%). Four tabs: **Enumeration** (joint heat table, pick query + evidence → cells light up, α-normalize), **Bayes’ rule** (medical-test mass-flow with sliders + base-rate fallacy + KaTeX formula), **Parameter counts** (full joint 2ⁿ−1 vs naïve Bayes 2n+1 on a log axis), **Conditional independence** (Cavity screens off Toothache⊥Catch). All use the shared VizGuide. The enumeration & conditional-independence tabs are **example-swappable** (`?ex=`) across three classical common-cause joints — Dentistry, Flu→Fever/Cough, Spam→"free"/"prize" — each built as a naïve-Bayes product so effect₁⊥effect₂|cause holds (tested).
 - **Shared: `VizGuide`** ("how to read this" panel — what / try-it / legend) now on every visualization in Topics 2–4.
+
+- **Topic 5 — Bayesian Networks** (exam Part B). Tested engine `src/lib/bayesnet.ts` (+ test): enumeration-ask, term expansion, Markov blanket, and a general **minimal-parents structure learner** (finds the network any variable ordering induces via conditional-independence over the true distribution). Validated on the burglary net: P(B|j,m)=⟨0.284,0.716⟩, P(Alarm)=0.00252, MB(A)={B,E,J,M}, causal order = 10 params, order M,J,A,B,E = 13 params (matches AIMA). Four tabs: **Network + enumeration** (DAG, editable CPTs, term-by-term sum + α), **Markov blanket** (hover to glow), **Variable ordering** (induced structure + arc/param counts), **Variable elimination** (factor cards merge & shrink, step-through). All use VizGuide.
 
 ### Decisions
 - **Animation engine: Framer Motion + d3 (Remotion deferred).** Interactive step-through is the exam skill (user-controlled state), which Framer Motion + d3 layout serve best; Remotion's build-time video shines for non-interactive intros and can be added per-topic later without disturbing the static build.
