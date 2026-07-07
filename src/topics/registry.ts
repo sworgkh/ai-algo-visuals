@@ -114,7 +114,9 @@ export const TOPICS: Topic[] = [
       'Prediction & decay',
       'Forward–backward smoothing',
       'Viterbi (most likely path)',
-    ],    status: 'coming-soon',
+    ],
+    status: 'available',
+    Component: lazy(() => import('./topic06-temporal')),
   },
   {
     num: 7,

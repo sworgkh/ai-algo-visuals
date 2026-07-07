@@ -1,0 +1,89 @@
+.vt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.vt-days {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.vt-day {
+  padding: 6px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.vt-day:hover {
+  border-color: var(--border-strong);
+}
+.vt-day.is-umb {
+  background: #6366f114;
+  border-color: var(--border-brand);
+  color: var(--text-strong);
+}
+
+.vt-canvas-wrap {
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+}
+.vt-canvas {
+  width: 100%;
+  min-width: 480px;
+  height: auto;
+}
+
+.vt-col-head {
+  fill: var(--text-muted);
+  font-size: 13px;
+}
+.vt-edge {
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+  opacity: 0.4;
+}
+.vt-edge.is-path {
+  stroke: var(--viz-4);
+  stroke-width: 3.5;
+  opacity: 1;
+}
+.vt-node circle {
+  fill: var(--surface-2);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+.vt-node.is-path circle {
+  fill: color-mix(in srgb, var(--viz-4) 22%, var(--surface-2));
+  stroke: var(--viz-4);
+  stroke-width: 2.5;
+}
+.vt-node-label {
+  fill: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+.vt-node.is-path .vt-node-label {
+  fill: var(--text-strong);
+}
+.vt-node-val {
+  fill: var(--text-muted);
+  font-size: 10px;
+}
+
+.vt-path {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-strong);
+  font-size: var(--text-sm);
+  overflow-x: auto;
+}

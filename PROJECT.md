@@ -152,7 +152,7 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 - [x] Topic 3: Real-World Planning (critical path!) 
 - [x] Topic 4: Uncertainty & Probability
 - [x] Topic 5: Bayesian Networks ⭐
-- [ ] Topic 6: Temporal Models (umbrella world!)
+- [x] Topic 6: Temporal Models (umbrella world!)
 - [ ] Topic 7: HMM ⭐
 - [ ] Topic 8: DBN & Particle Filtering
 - [ ] Topic 9: NLP Foundations
@@ -186,6 +186,8 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 - **Shared: `VizGuide`** ("how to read this" panel — what / try-it / legend) now on every visualization in Topics 2–4.
 
 - **Topic 5 — Bayesian Networks** (exam Part B). Tested engine `src/lib/bayesnet.ts` (+ test): enumeration-ask, term expansion, Markov blanket, and a general **minimal-parents structure learner** (finds the network any variable ordering induces via conditional-independence over the true distribution). Validated on the burglary net: P(B|j,m)=⟨0.284,0.716⟩, P(Alarm)=0.00252, MB(A)={B,E,J,M}, causal order = 10 params, order M,J,A,B,E = 13 params (matches AIMA). Four tabs: **Network + enumeration** (DAG, editable CPTs, term-by-term sum + α), **Markov blanket** (hover to glow), **Variable ordering** (induced structure + arc/param counts), **Variable elimination** (factor cards merge & shrink, step-through). All use VizGuide.
+
+- **Topic 6 — Temporal Models** (umbrella world). Tested HMM engine `src/lib/hmm.ts` (+ `hmm.test.ts`, 5 tests): `predict`/`update`/`filter` (predict→update recursion), `predictAhead`, `backward`, `smooth` (forward–backward), `viterbi`. Validated on the AIMA umbrella HMM (prior ⟨0.5,0.5⟩, trans 0.7, sensor 0.9/0.2): filtering ⟨0.5⟩→0.818→0.883, prediction decays to the ⟨0.5,0.5⟩ stationary dist, and Viterbi on u=T,T gives ⟨Rain,Rain⟩. Four tabs (`?tab=`): **Filtering** (step-through predict/update per day, KaTeX with the predict-term/update-term glowing in sync, editable ☂/☀ evidence, belief bars), **Prediction** (start-belief slider → bars decay to the 0.5 stationary line), **Smoothing** (filtered vs smoothed grouped bars; honest wording — future evidence can reinforce *or* pull back an estimate; last day identical), **Viterbi** (SVG states×time trellis, best path thickened in green, back-pointer trace). All use VizGuide.
 
 ### Decisions
 - **Animation engine: Framer Motion + d3 (Remotion deferred).** Interactive step-through is the exam skill (user-controlled state), which Framer Motion + d3 layout serve best; Remotion's build-time video shines for non-interactive intros and can be added per-topic later without disturbing the static build.
