@@ -1,0 +1,53 @@
+.ve {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.ve-stage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  min-height: 130px;
+  padding: var(--space-5);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.ve-factor {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: var(--space-3) var(--space-4);
+  min-width: 116px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-med), box-shadow var(--dur-med);
+}
+.ve-factor.is-combine {
+  border-color: var(--brand-400);
+  box-shadow: 0 0 0 1px #6366f14d, var(--glow-brand-soft);
+}
+.ve-factor.is-new {
+  border-color: var(--success);
+  box-shadow: 0 0 14px -2px #34d39966;
+}
+.ve-factor-name {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+.ve-factor-size {
+  font-size: var(--text-xs);
+  font-weight: 650;
+  color: var(--brand-300);
+  font-variant-numeric: tabular-nums;
+}
+.ve-factor.is-new .ve-factor-size {
+  color: var(--success);
+}
+.ve-factor-vars {
+  font-size: 11px;
+  color: var(--text-muted);
+}

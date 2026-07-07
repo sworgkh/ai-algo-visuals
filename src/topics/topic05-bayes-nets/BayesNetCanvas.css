@@ -1,0 +1,71 @@
+.bnc-wrap {
+  padding: var(--space-3);
+  background:
+    radial-gradient(500px 260px at 50% 0%, #6366f10d, transparent 70%),
+    var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.bnc {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+}
+
+.bnc-arc {
+  stroke: var(--border-strong);
+  stroke-width: 1.75;
+}
+.bnc-arc.is-active {
+  stroke: var(--violet-400);
+  stroke-width: 2.5;
+}
+.bnc-arc.is-dim {
+  opacity: 0.25;
+}
+
+.bnc-node {
+  cursor: default;
+}
+.bnc-node-box {
+  fill: var(--surface-2);
+  stroke: var(--border-default);
+  stroke-width: 1.5;
+  transition:
+    fill var(--dur-fast) var(--ease-out),
+    stroke var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+.bnc-node-label {
+  fill: var(--text-strong);
+  font-size: 13px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* highlight states */
+.bnc-node.is-query .bnc-node-box {
+  fill: #6366f129;
+  stroke: var(--brand-400);
+  filter: drop-shadow(0 0 8px #6366f166);
+}
+.bnc-node.is-evidence .bnc-node-box {
+  fill: #34d39926;
+  stroke: var(--success);
+}
+.bnc-node.is-blanket .bnc-node-box {
+  fill: #8b5cf622;
+  stroke: var(--violet-400);
+}
+.bnc-node.is-focus .bnc-node-box {
+  fill: #6366f13a;
+  stroke: var(--brand-300);
+  filter: drop-shadow(0 0 10px #818cf888);
+}
+.bnc-node.is-dim {
+  opacity: 0.4;
+}
+.bnc-node.is-hoverable {
+  cursor: pointer;
+}

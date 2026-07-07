@@ -99,7 +99,9 @@ export const TOPICS: Topic[] = [
       'Variable ordering',
       'Explaining away',
       'Variable elimination',
-    ],    status: 'coming-soon',
+    ],
+    status: 'available',
+    Component: lazy(() => import('./topic05-bayes-nets')),
   },
   {
     num: 6,
