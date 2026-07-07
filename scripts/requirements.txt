@@ -1,0 +1,3 @@
+# Build-time Python tooling for precomputing datasets → src/data/*.json.
+# Kept minimal; add per-topic deps as needed.
+numpy>=1.26

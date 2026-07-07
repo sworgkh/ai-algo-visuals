@@ -1,0 +1,117 @@
+.pop-canvas-wrap {
+  padding: var(--space-4) var(--space-3);
+  background:
+    radial-gradient(700px 340px at 25% 0%, #6366f10f, transparent 70%),
+    var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pop-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ordering edges */
+.pc-ordering {
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+/* causal links (lines) */
+.pc-link path {
+  stroke: var(--violet-400);
+  stroke-width: 2.25;
+}
+.pc-link polygon {
+  fill: var(--violet-400);
+}
+.pc-link.is-spotlight path {
+  stroke: var(--violet-300);
+  stroke-width: 3;
+  filter: drop-shadow(0 0 6px #a78bfa88);
+}
+.pc-link.is-threatened path,
+.pc-link.is-threatened polygon {
+  stroke: var(--danger);
+  fill: var(--danger);
+}
+
+/* causal-link labels (drawn on top of nodes) */
+.pc-lbl-bg {
+  fill: var(--bg-1);
+  stroke: #8b5cf655;
+  stroke-width: 1;
+}
+.pc-lbl-text {
+  fill: var(--violet-300);
+  font-size: 11.5px;
+}
+.pc-lbl.is-threatened .pc-lbl-bg {
+  fill: #2a1418;
+  stroke: #f8717199;
+}
+.pc-lbl.is-threatened .pc-lbl-text {
+  fill: var(--danger);
+}
+
+/* threat arrow */
+.pc-threat line {
+  stroke: var(--danger);
+  stroke-width: 2.5;
+}
+.pc-threat polygon {
+  fill: var(--danger);
+}
+
+/* nodes */
+.pc-node {
+  cursor: pointer;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.pc-node-box {
+  fill: var(--surface-2);
+  stroke: var(--border-default);
+  stroke-width: 1.5;
+  transition:
+    fill var(--dur-fast) var(--ease-out),
+    stroke var(--dur-fast) var(--ease-out);
+}
+.pc-node:hover .pc-node-box {
+  stroke: var(--border-brand);
+}
+.pc-node.is-endpoint .pc-node-box {
+  fill: var(--surface-3);
+  stroke: var(--border-strong);
+}
+.pc-node.is-selected .pc-node-box {
+  stroke: var(--brand-400);
+  filter: drop-shadow(0 0 8px #6366f166);
+}
+.pc-node.is-clobberer .pc-node-box {
+  stroke: var(--danger);
+  filter: drop-shadow(0 0 8px #f8717166);
+}
+.pc-node-label {
+  fill: var(--text-strong);
+  font-size: 13px;
+  font-weight: 600;
+  pointer-events: none;
+}
+.pc-node.is-endpoint .pc-node-label {
+  fill: var(--text-secondary);
+}
+.pc-open-badge circle {
+  fill: var(--warning);
+}
+.pc-open-badge text {
+  fill: #1a1d2e;
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  pointer-events: none;
+}

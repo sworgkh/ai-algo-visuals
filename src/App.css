@@ -1,0 +1,31 @@
+.app-shell {
+  display: flex;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-7) var(--space-7) var(--space-8);
+}
+
+.app-content-inner {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.route-loading {
+  display: grid;
+  place-items: center;
+  min-height: 40vh;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 720px) {
+  .app-content {
+    padding: var(--space-5) var(--space-4) var(--space-7);
+  }
+}

@@ -1,0 +1,3 @@
+# Netlify SPA fallback: serve index.html for any client-side route so deep
+# links like /topic/search resolve. (Copied verbatim into dist/ at build.)
+/*    /index.html   200

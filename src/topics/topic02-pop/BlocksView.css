@@ -1,0 +1,52 @@
+.blocks-view {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: var(--space-4);
+  background:
+    radial-gradient(400px 200px at 50% 100%, #6366f110, transparent 70%),
+    var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  min-height: 200px;
+  justify-content: flex-end;
+}
+.bv-scene {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-5);
+  min-height: 150px;
+}
+.bv-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.bv-block {
+  width: 56px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  color: #0d0f16;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  box-shadow: inset 0 2px 0 #ffffff40, inset 0 -3px 6px #00000033, var(--shadow-sm);
+}
+.bv-table {
+  width: min(360px, 90%);
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, transparent, var(--surface-4), transparent);
+  margin-top: 6px;
+}
+.bv-caption {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}

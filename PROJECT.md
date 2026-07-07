@@ -138,17 +138,17 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 
 ## 6. Phases & Checklist  ← keep this updated after every work session
 
-### Phase 0 — Foundation
-- [ ] Vite + React + TS scaffold, routing, static build verified (`dist/` opens from file/any static server)
-- [ ] Design tokens: dark blue/purple palette, typography, spacing, focus states
-- [ ] App shell: collapsible left sidebar with all 10 topics (disabled state for unbuilt ones), Home page with course/exam overview
-- [ ] Shared primitives: StepPlayer, FormulaBlock (KaTeX, **with per-term highlight support**), bar/graph helpers
-- [ ] Animation engine decision recorded in changelog (Remotion / Framer Motion / d3 / mix) with rationale
-- [ ] Python tooling skeleton (`scripts/`, requirements.txt) + `npm run gen` hook
+### Phase 0 — Foundation ✅ (complete)
+- [x] Vite + React + TS scaffold, routing (BrowserRouter), static build verified (`dist/` served from any static host; SPA fallback via `_redirects` + `vercel.json`)
+- [x] Design tokens: dark blue/purple palette, typography, spacing, focus states (`src/theme/tokens.css`)
+- [x] App shell: collapsible left sidebar with all 10 topics (locked/greyed state for unbuilt ones), Home page with course/exam overview
+- [x] Shared primitives: StepPlayer (+`useStepPlayer` hook), FormulaBlock (KaTeX, **per-term highlight** via `term()` helper), BarPair/BarStack, graph geometry helper (`src/lib/graph.ts`)
+- [x] Animation engine decision recorded in changelog (Framer Motion + d3; Remotion deferred) with rationale
+- [x] Python tooling skeleton (`scripts/`, requirements.txt, `gen_all.py`) + `npm run gen` hook
 
 ### Phase 1 — Topics (ONE AT A TIME, USER-TRIGGERED ONLY)
 - [ ] Topic 1: Search Foundations
-- [ ] Topic 2: Planning, STRIPS & POP ⭐
+- [x] Topic 2: Planning, STRIPS & POP ⭐
 - [ ] Topic 3: Real-World Planning (critical path!) 
 - [ ] Topic 4: Uncertainty & Probability
 - [ ] Topic 5: Bayesian Networks ⭐
@@ -175,3 +175,14 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 
 ## 8. Changelog
 *(append one line per completed unit of work)*
+
+- **Phase 0 — Foundation.** Scaffolded Vite + React 19 + TS. Shell: collapsible `Sidebar` (reads a single `topics/registry.ts`), `App` layout, `Home` (course/exam overview + topic grid + live per-term formula showcase), `ComingSoon`/`NotFound`, `TopicRoute` dispatcher. Shared primitives: `FormulaBlock` (KaTeX + `term()` per-term highlight), `useStepPlayer` hook + `StepPlayer` control (keyboard: ←/→/Space/Home), `BarPair`/`BarStack`, `lib/graph.ts` edge geometry. Dark blue/purple design tokens. Python `scripts/` skeleton + `npm run gen`. All 10 topics greyed as coming-soon. `npm run build` verified.
+
+- **Topic 2 — Planning, STRIPS & POP** (exam Part B). Domain: **Sussman anomaly** (blocks world, Move/MoveToTable). Correctness-first: pure engine in `src/lib/strips.ts` (grounding, forward apply, regression, relevance) + `src/lib/pop.ts` (plan, ordering/cycle logic, threat detection, promotion/demotion, linearize-then-simulate validator), covered by **Vitest** (`src/lib/planning.test.ts`, 8 tests) asserting the interleaved plan reaches the goal, both goal-first orderings dead-end, and the guided derivation is complete/valid with exactly the two `Clear(C)`/`Clear(B)` demotion threats. Four tabs (deep-linkable via `?tab=`/`?step=`): **POP Planner** (guided step-through + free play; interactive promote/demote; SVG canvas with causal links, open-precond agenda, flashing threats), **STRIPS forward** (blocks-world animation, add/delete chips, both goal-first orderings hit dead-ends), **Regression** (backward goal transform), and **Forward vs. Backward** (the "backward search can be more efficient" T/F exam item: side-by-side search fan-out, forward's goal-irrelevant actions dimmed, honest branching counts + the set-based-heuristics caveat). Registry-driven lazy chunk. Added `?tab`/`?step` deep-linking + `useStepPlayer` `initialIndex`.
+
+### Decisions
+- **Animation engine: Framer Motion + d3 (Remotion deferred).** Interactive step-through is the exam skill (user-controlled state), which Framer Motion + d3 layout serve best; Remotion's build-time video shines for non-interactive intros and can be added per-topic later without disturbing the static build.
+- **Routing: `BrowserRouter` (clean URLs).** Primary use is `npm run dev` + deploy `dist/` to a static host; SPA fallback configs shipped for Netlify/Vercel. (For sub-path hosting set `base` in `vite.config.ts`.)
+- **StepPlayer state via a local `useStepPlayer` hook, not a global store (dropped the planned Zustand dep).** Lets multiple independent players coexist on one page; YAGNI on global state.
+- **Fonts vendored via `@fontsource-variable/*` (Inter + JetBrains Mono).** No external font requests → stays fully static/offline.
+- **Icons: local inline SVG set** (`components/Icons.tsx`) — zero icon-library weight, on-brand.

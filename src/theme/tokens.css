@@ -1,0 +1,135 @@
+/* =============================================================================
+   Design tokens — refined dark theme with blue/purple tints.
+   Dark-only by design (see brief). All UI reads from these variables; never
+   hard-code a hex in a component.
+   ============================================================================= */
+
+:root {
+  /* ---- Brand ramp (indigo → violet) ------------------------------------- */
+  --brand-500: #6366f1; /* indigo — primary accent */
+  --brand-400: #818cf8;
+  --brand-300: #a5b4fc;
+  --violet-500: #8b5cf6;
+  --violet-400: #a78bfa;
+  --violet-300: #c4b5fd;
+
+  /* ---- Neutral surface ramp (cool, blue-tinted) ------------------------- */
+  --bg-0: #0d0f16; /* app backdrop, deepest */
+  --bg-1: #0f1117; /* page background */
+  --surface-1: #161927; /* cards / panels */
+  --surface-2: #1a1d2e; /* raised surfaces, sidebar */
+  --surface-3: #222741; /* hover / active surfaces */
+  --surface-4: #2b3153; /* strong hover, selected chip */
+
+  /* ---- Hairlines & borders ---------------------------------------------- */
+  --border-subtle: #ffffff14; /* faint separators */
+  --border-default: #ffffff1f;
+  --border-strong: #ffffff2e;
+  --border-brand: #6366f166;
+
+  /* ---- Text ------------------------------------------------------------- */
+  --text-strong: #eef0f6; /* headings */
+  --text-primary: #c9cdd6; /* body */
+  --text-secondary: #9aa1b2; /* secondary / captions */
+  --text-muted: #6b7288; /* disabled / hints */
+  --text-on-brand: #ffffff;
+
+  /* ---- Semantic status -------------------------------------------------- */
+  --success: #34d399;
+  --success-dim: #34d39926;
+  --warning: #fbbf24;
+  --warning-dim: #fbbf2426;
+  --danger: #f87171;
+  --danger-dim: #f8717126;
+  --info: var(--brand-400);
+
+  /* ---- Data-viz categorical palette (accessible on dark surfaces) ------- */
+  --viz-1: #818cf8; /* indigo   */
+  --viz-2: #a78bfa; /* violet   */
+  --viz-3: #22d3ee; /* cyan     */
+  --viz-4: #34d399; /* green    */
+  --viz-5: #fbbf24; /* amber    */
+  --viz-6: #fb7185; /* rose     */
+  --viz-7: #f472b6; /* pink     */
+  --viz-8: #4ade80; /* lime     */
+
+  /* Roles used by algorithm visualizations */
+  --viz-frontier: #fbbf24; /* queue / stack / open set */
+  --viz-explored: #6366f1; /* closed / visited set     */
+  --viz-path: #34d399; /* solution path            */
+  --viz-goal: #fb7185; /* goal                     */
+  --viz-start: #22d3ee; /* start                    */
+  --viz-wall: #2b3153; /* obstacle                 */
+
+  /* ---- Accent tints / glows --------------------------------------------- */
+  --glow-brand: 0 0 0 1px #6366f14d, 0 8px 24px -6px #6366f159;
+  --glow-brand-soft: 0 0 24px -4px #6366f166;
+  --glow-focus: 0 0 0 3px #818cf866;
+
+  /* ---- Elevation shadows ------------------------------------------------ */
+  --shadow-sm: 0 1px 2px #00000047;
+  --shadow-md: 0 6px 20px -6px #0000006b, 0 2px 6px -2px #00000042;
+  --shadow-lg: 0 20px 48px -12px #00000080, 0 8px 20px -8px #00000059;
+
+  /* ---- Radius ----------------------------------------------------------- */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* ---- Spacing scale (4px base) ----------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* ---- Typography ------------------------------------------------------- */
+  --font-sans: 'InterVariable', 'Inter', system-ui, -apple-system,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains MonoVariable', 'JetBrains Mono', ui-monospace,
+    'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem; /* 12 */
+  --text-sm: 0.8125rem; /* 13 */
+  --text-base: 0.9375rem; /* 15 */
+  --text-md: 1.0625rem; /* 17 */
+  --text-lg: 1.25rem; /* 20 */
+  --text-xl: 1.5rem; /* 24 */
+  --text-2xl: 2rem; /* 32 */
+  --text-3xl: 2.5rem; /* 40 */
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.55;
+  --tracking-tight: -0.01em;
+  --tracking-wide: 0.02em;
+
+  /* ---- Motion ----------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-med: 220ms;
+  --dur-slow: 420ms;
+
+  /* ---- Layout ----------------------------------------------------------- */
+  --sidebar-w: 268px;
+  --sidebar-w-collapsed: 68px;
+  --content-max: 1080px;
+  --header-h: 56px;
+  --z-sidebar: 40;
+  --z-header: 30;
+  --z-overlay: 60;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-med: 0ms;
+    --dur-slow: 0ms;
+  }
+}

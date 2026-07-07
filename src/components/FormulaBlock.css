@@ -1,0 +1,44 @@
+.formula-block {
+  color: var(--text-strong);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: var(--space-1) 0;
+  max-width: 100%;
+}
+
+.formula-block .katex {
+  font-size: 1.18em;
+}
+
+.formula-block--inline {
+  display: inline-block;
+  padding: 0;
+  vertical-align: middle;
+}
+.formula-block--inline .katex {
+  font-size: 1em;
+}
+
+/* --- Per-term highlighting ---------------------------------------------- */
+.fb-term {
+  border-radius: var(--radius-xs);
+  padding: 0.08em 0.16em;
+  margin: 0 -0.02em;
+  transition:
+    color var(--dur-med) var(--ease-out),
+    background-color var(--dur-med) var(--ease-out),
+    opacity var(--dur-med) var(--ease-out),
+    text-shadow var(--dur-med) var(--ease-out);
+}
+
+/* When at least one term is active, non-active terms recede. */
+.formula-block.fb-has-active .fb-term:not(.is-active) {
+  opacity: 0.4;
+}
+
+.fb-term.is-active {
+  color: var(--violet-300);
+  background: linear-gradient(180deg, #8b5cf62e, #6366f11f);
+  box-shadow: inset 0 0 0 1px #a78bfa4d;
+  text-shadow: 0 0 14px #a78bfa66;
+}

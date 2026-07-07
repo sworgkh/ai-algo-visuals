@@ -1,0 +1,102 @@
+/* --- BarPair ------------------------------------------------------------- */
+.barpair {
+  margin: 0;
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.barpair-title,
+.barstack-title {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: 550;
+}
+.barpair-cols {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+.barpair-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  height: 100%;
+  min-width: 52px;
+}
+.barpair-value {
+  font-size: var(--text-sm);
+  color: var(--text-strong);
+  font-weight: 600;
+}
+.barpair-track {
+  position: relative;
+  flex: 1;
+  width: 44px;
+  display: flex;
+  align-items: flex-end;
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.barpair-fill {
+  width: 100%;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  box-shadow: inset 0 1px 0 #ffffff33;
+}
+.barpair-label {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* --- BarStack ------------------------------------------------------------ */
+.barstack {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 220px;
+}
+.barstack-track {
+  display: flex;
+  width: 100%;
+  height: 34px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+}
+.barstack-seg {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  box-shadow: inset -1px 0 0 #0000002e, inset 0 1px 0 #ffffff26;
+}
+.barstack-seg-value {
+  font-size: var(--text-xs);
+  color: #0d0f16;
+  font-weight: 700;
+  padding: 0 4px;
+  white-space: nowrap;
+}
+.barstack-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.barstack-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+.barstack-legend-item i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}

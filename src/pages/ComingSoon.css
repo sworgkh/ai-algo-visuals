@@ -1,0 +1,94 @@
+.coming-soon {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+  padding: var(--space-6) 0;
+}
+.cs-panel {
+  max-width: 560px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-7) var(--space-6);
+  background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+.cs-badge {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  color: var(--violet-300);
+  background: #8b5cf61a;
+  border: 1px solid #8b5cf636;
+  box-shadow: var(--glow-brand-soft);
+}
+.cs-eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 650;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--brand-300);
+}
+.cs-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-2xl);
+  margin: 0;
+}
+.cs-star {
+  color: var(--warning);
+}
+.cs-tagline {
+  color: var(--text-secondary);
+  max-width: 46ch;
+}
+.cs-preview {
+  width: 100%;
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.cs-preview-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.cs-concepts {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-3) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+.cs-concepts li {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+}
+.cs-note {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  max-width: 48ch;
+  margin-top: var(--space-2);
+}
+.cs-back {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 550;
+}
