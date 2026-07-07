@@ -83,7 +83,9 @@ export const TOPICS: Topic[] = [
       'Marginalization & normalization',
       '(Conditional) independence',
       'Bayes’ rule',
-    ],    status: 'coming-soon',
+    ],
+    status: 'available',
+    Component: lazy(() => import('./topic04-uncertainty')),
   },
   {
     num: 5,

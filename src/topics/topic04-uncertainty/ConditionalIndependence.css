@@ -1,0 +1,114 @@
+.ci {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.ci-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+.ci-ctl-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.ci-seg {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.ci-seg-btn {
+  padding: 5px 13px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--dur-fast), color var(--dur-fast);
+}
+.ci-seg-btn:hover {
+  color: var(--text-strong);
+}
+.ci-seg-btn.is-active {
+  color: var(--text-strong);
+  background: var(--surface-4);
+}
+.ci-verdict {
+  margin-left: auto;
+  font-size: var(--text-sm);
+  font-weight: 650;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+.ci-verdict.is-indep {
+  color: var(--success);
+  background: var(--success-dim);
+  border: 1px solid #34d39940;
+}
+.ci-verdict.is-corr {
+  color: var(--warning);
+  background: var(--warning-dim);
+  border: 1px solid #fbbf2440;
+}
+
+.ci-bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.ci-bar-row {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  align-items: center;
+  gap: var(--space-3);
+}
+.ci-bar-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: right;
+}
+.ci-bar-track {
+  position: relative;
+  height: 30px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.ci-bar-fill {
+  height: 100%;
+  border-radius: 0;
+}
+.ci-bar-val {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+@media (max-width: 640px) {
+  .ci-bar-row {
+    grid-template-columns: 1fr;
+  }
+  .ci-bar-label {
+    text-align: left;
+  }
+}

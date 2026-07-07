@@ -1,0 +1,128 @@
+.pc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.pc-readout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+.pc-slider {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pc-slider-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.pc-slider-top .mono {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+.pc-slider input {
+  width: 100%;
+  accent-color: var(--brand-500);
+}
+.pc-nums {
+  display: flex;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+.pc-num {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pc-num-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+.pc-num-val {
+  font-size: var(--text-xl);
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+.pc-num--joint .pc-num-val {
+  color: var(--brand-300);
+}
+.pc-num--naive .pc-num-val {
+  color: var(--success);
+}
+.pc-num--ratio .pc-num-val {
+  color: var(--text-strong);
+}
+
+.pc-chart {
+  padding: var(--space-4);
+  background: var(--bg-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+.pc-chart-axis {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+.pc-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 220px;
+}
+.pc-col {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: var(--radius-sm);
+}
+.pc-col:hover {
+  background: var(--surface-2);
+}
+.pc-col.is-active {
+  background: var(--surface-3);
+}
+.pc-col-bars {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 3px;
+}
+.pc-col-bar {
+  width: 42%;
+  border-radius: 2px 2px 0 0;
+  min-height: 2px;
+}
+.pc-col-bar--joint {
+  background: linear-gradient(180deg, var(--brand-400), var(--brand-500));
+}
+.pc-col-bar--naive {
+  background: linear-gradient(180deg, #4ade80, var(--success));
+}
+.pc-col-n {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+.pc-col.is-active .pc-col-n {
+  color: var(--text-strong);
+  font-weight: 700;
+}
