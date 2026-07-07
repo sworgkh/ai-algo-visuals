@@ -157,28 +157,3 @@
   border-color: color-mix(in srgb, var(--viz-4) 40%, transparent);
 }
 
-/* Replays whenever the derivation numbers change (keyed remount). The text
-   stays fully opaque — the change is signalled by a brand-tinted highlight
-   that fades out plus a subtle rise, so the numbers are never unreadable. */
-@keyframes mf-deriv-in {
-  0% {
-    background: color-mix(in srgb, var(--brand-500) 24%, transparent);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand-500) 40%, transparent);
-    transform: translateY(3px);
-  }
-  100% {
-    background: transparent;
-    box-shadow: inset 0 0 0 1px transparent;
-    transform: translateY(0);
-  }
-}
-.mf-deriv-anim {
-  animation: mf-deriv-in 0.55s var(--ease-out);
-  border-radius: var(--radius-sm);
-  padding: 2px 4px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .mf-deriv-anim {
-    animation: none;
-  }
-}

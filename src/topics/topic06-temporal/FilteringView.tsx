@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { type FilterStep, type HMM, filter } from '@/lib/hmm'
+import { type HMM, filter } from '@/lib/hmm'
+import { useChangedKeys } from '@/hooks/useChangedKeys'
 import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
 import { FormulaBlock } from '@/components/FormulaBlock'
@@ -43,7 +44,25 @@ export function FilteringView() {
           RAIN
         ].toFixed(3)}.`
 
-  const deriv = buildDerivation(prevRain, step, UMBRELLA_HMM, obs[day])
+  const sR = UMBRELLA_HMM.sensor[RAIN][obs[day]]
+  const sNR = UMBRELLA_HMM.sensor[NORAIN][obs[day]]
+  const wR = sR * step.predicted[RAIN]
+  const wNR = sNR * step.predicted[NORAIN]
+  const nums = {
+    pr: prevRain,
+    pnr: 1 - prevRain,
+    predR: step.predicted[RAIN],
+    predNR: step.predicted[NORAIN],
+    sR,
+    sNR,
+    wR,
+    wNR,
+    Z: wR + wNR,
+    al: 1 / (wR + wNR),
+    updR: step.updated[RAIN],
+  }
+  const hot = useChangedKeys(nums)
+  const deriv = buildDerivation(nums, UMBRELLA_HMM, hot)
 
   return (
     <div className="flt">
@@ -115,15 +134,11 @@ export function FilteringView() {
         <div className="flt-deriv-body">
           <div className="flt-deriv-line">
             <span className="flt-deriv-tag flt-deriv-tag--predict">1 · predict</span>
-            <div className="flt-deriv-anim" key={deriv.predict}>
-              <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
-            </div>
+            <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
           </div>
           <div className="flt-deriv-line">
             <span className="flt-deriv-tag flt-deriv-tag--update">2 · update</span>
-            <div className="flt-deriv-anim" key={deriv.update}>
-              <FormulaBlock tex={deriv.update} ariaLabel="sensor update and normalization with numbers" />
-            </div>
+            <FormulaBlock tex={deriv.update} ariaLabel="sensor update and normalization with numbers" />
           </div>
         </div>
       </details>
@@ -134,37 +149,37 @@ export function FilteringView() {
 }
 
 const f2 = (n: number) => n.toFixed(2)
-const f3 = (n: number) => n.toFixed(3)
 
 interface Derivation {
   predict: string
   update: string
 }
 
-/** The full scalar expansion of one filtering day with every number plugged in. */
-function buildDerivation(prevRain: number, step: FilterStep, hmm: HMM, obs: string): Derivation {
-  const pr = prevRain
-  const pnr = 1 - prevRain
-  const predR = step.predicted[RAIN]
-  const predNR = step.predicted[NORAIN]
-  const sR = hmm.sensor[RAIN][obs]
-  const sNR = hmm.sensor[NORAIN][obs]
-  const wR = sR * predR
-  const wNR = sNR * predNR
-  const Z = wR + wNR
-  const updR = step.updated[RAIN]
+/**
+ * The full scalar expansion of one filtering day. Each varying number is
+ * wrapped in \htmlClass (.deriv-num); keys in `hot` (changed this render) also
+ * get .deriv-num--hot, which flashes just that number.
+ */
+function buildDerivation(nums: Record<string, number>, hmm: HMM, hot: Set<string>): Derivation {
+  const N = (key: string, dec = 3) =>
+    String.raw`\htmlClass{deriv-num${hot.has(key) ? ' deriv-num--hot' : ''}}{${nums[key].toFixed(dec)}}`
+  const c = f2
+  const tRR = hmm.trans[RAIN][RAIN]
+  const tNRR = hmm.trans[NORAIN][RAIN]
+  const tRNR = hmm.trans[RAIN][NORAIN]
+  const tNRNR = hmm.trans[NORAIN][NORAIN]
 
   const predict = String.raw`\begin{aligned}
     P(R_t \mid e_{1:t-1}) &= \sum_r P(R_t \mid r)\,P(r \mid e_{1:t-1}) \\[2pt]
-    &= ${f2(hmm.trans[RAIN][RAIN])}(${f3(pr)}) + ${f2(hmm.trans[NORAIN][RAIN])}(${f3(pnr)}) = \mathbf{${f3(predR)}} \\[2pt]
-    P(\lnot R_t \mid e_{1:t-1}) &= ${f2(hmm.trans[RAIN][NORAIN])}(${f3(pr)}) + ${f2(hmm.trans[NORAIN][NORAIN])}(${f3(pnr)}) = \mathbf{${f3(predNR)}}
+    &= ${c(tRR)}(${N('pr')}) + ${c(tNRR)}(${N('pnr')}) = ${N('predR')} \\[2pt]
+    P(\lnot R_t \mid e_{1:t-1}) &= ${c(tRNR)}(${N('pr')}) + ${c(tNRNR)}(${N('pnr')}) = ${N('predNR')}
   \end{aligned}`
 
   const update = String.raw`\begin{aligned}
-    \tilde P(R_t) &= P(e_t \mid R_t)\,P(R_t \mid e_{1:t-1}) = ${f2(sR)}(${f3(predR)}) = ${f3(wR)} \\[2pt]
-    \tilde P(\lnot R_t) &= ${f2(sNR)}(${f3(predNR)}) = ${f3(wNR)} \\[2pt]
-    \alpha &= \frac{1}{${f3(wR)} + ${f3(wNR)}} = \frac{1}{${f3(Z)}} = ${f3(1 / Z)} \\[2pt]
-    P(R_t \mid e_{1:t}) &= \alpha\,\tilde P(R_t) = \mathbf{${f3(updR)}}
+    \tilde P(R_t) &= P(e_t \mid R_t)\,P(R_t \mid e_{1:t-1}) = ${N('sR', 2)}(${N('predR')}) = ${N('wR')} \\[2pt]
+    \tilde P(\lnot R_t) &= ${N('sNR', 2)}(${N('predNR')}) = ${N('wNR')} \\[2pt]
+    \alpha &= \frac{1}{${N('wR')} + ${N('wNR')}} = \frac{1}{${N('Z')}} = ${N('al')} \\[2pt]
+    P(R_t \mid e_{1:t}) &= \alpha\,\tilde P(R_t) = ${N('updR')}
   \end{aligned}`
 
   return { predict, update }

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
-import { type MatrixFilterStep, matrixFilter } from '@/lib/hmmMatrix'
+import { matrixFilter } from '@/lib/hmmMatrix'
+import { useChangedKeys } from '@/hooks/useChangedKeys'
 import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
 import { FormulaBlock } from '@/components/FormulaBlock'
@@ -37,7 +38,24 @@ export function MatrixFilterView() {
     UMBRELLA_HMM.states.map((_, j) => (i === j ? UMBRELLA_HMM.sensor[s][obs[day]] : 0)),
   )
   const reached = (p: Phase) => PHASES.indexOf(p) <= PHASES.indexOf(phase)
-  const deriv = buildDerivation(fIn, m.Tt, O, step)
+
+  // Named numbers in the worked derivation; `hot` = those that changed this render.
+  const nums = {
+    a: fIn[0],
+    b: fIn[1],
+    p0: step.predicted[0],
+    p1: step.predicted[1],
+    s0: O[0][0],
+    s1: O[1][1],
+    w0: step.weighted[0],
+    w1: step.weighted[1],
+    Z: 1 / step.alpha,
+    al: step.alpha,
+    u0: step.updated[0],
+    u1: step.updated[1],
+  }
+  const hot = useChangedKeys(nums)
+  const deriv = buildDerivation(nums, m.Tt, hot)
 
   const caption =
     phase === 'trans'
@@ -139,21 +157,15 @@ export function MatrixFilterView() {
         <div className="mf-deriv-body">
           <div className="mf-deriv-line">
             <span className="mf-deriv-tag mf-deriv-tag--predict">1 · predict</span>
-            <div className="mf-deriv-anim" key={deriv.predict}>
-              <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
-            </div>
+            <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
           </div>
           <div className="mf-deriv-line">
             <span className="mf-deriv-tag mf-deriv-tag--sensor">2 · update</span>
-            <div className="mf-deriv-anim" key={deriv.update}>
-              <FormulaBlock tex={deriv.update} ariaLabel="sensor update expansion with numbers" />
-            </div>
+            <FormulaBlock tex={deriv.update} ariaLabel="sensor update expansion with numbers" />
           </div>
           <div className="mf-deriv-line">
             <span className="mf-deriv-tag mf-deriv-tag--alpha">3 · normalize</span>
-            <div className="mf-deriv-anim" key={deriv.normalize}>
-              <FormulaBlock tex={deriv.normalize} ariaLabel="normalization expansion with numbers" />
-            </div>
+            <FormulaBlock tex={deriv.normalize} ariaLabel="normalization expansion with numbers" />
           </div>
         </div>
       </details>
@@ -170,8 +182,6 @@ function allCells(n: number): Set<string> {
 }
 
 const fM = (n: number) => n.toFixed(2)
-const fV = (n: number) => n.toFixed(3)
-const bvec = (a: number, b: number) => String.raw`\begin{bmatrix} ${fV(a)} \\ ${fV(b)} \end{bmatrix}`
 
 interface Derivation {
   predict: string
@@ -179,34 +189,31 @@ interface Derivation {
   normalize: string
 }
 
-/** The full worked expansion of one filtering step with the actual numbers. */
-function buildDerivation(
-  fIn: number[],
-  Tt: number[][],
-  O: number[][],
-  step: MatrixFilterStep,
-): Derivation {
-  const [a, b] = fIn
-  const [p1, p2] = step.predicted
-  const [w1, w2] = step.weighted
-  const [u1, u2] = step.updated
-  const s1 = O[0][0]
-  const s2 = O[1][1]
-  const Z = w1 + w2
+/**
+ * The full worked expansion of one filtering step. Each *varying* number is
+ * wrapped in \htmlClass so it can be styled; keys present in `hot` (changed
+ * this render) also get `deriv-num--hot`, which flashes just that number.
+ */
+function buildDerivation(nums: Record<string, number>, Tt: number[][], hot: Set<string>): Derivation {
+  // N: a varying number (highlightable). c: a constant model coefficient (plain).
+  const N = (key: string, dec = 3) =>
+    String.raw`\htmlClass{deriv-num${hot.has(key) ? ' deriv-num--hot' : ''}}{${nums[key].toFixed(dec)}}`
+  const c = fM
+  const vec = (k0: string, k1: string) => String.raw`\begin{bmatrix} ${N(k0)} \\ ${N(k1)} \end{bmatrix}`
 
   const predict = String.raw`\mathbf{T}^{\top}\mathbf{f}_t
-    = \begin{bmatrix} ${fM(Tt[0][0])} & ${fM(Tt[0][1])} \\ ${fM(Tt[1][0])} & ${fM(Tt[1][1])} \end{bmatrix}\!${bvec(a, b)}
-    = \begin{bmatrix} ${fM(Tt[0][0])}(${fV(a)}) + ${fM(Tt[0][1])}(${fV(b)}) \\ ${fM(Tt[1][0])}(${fV(a)}) + ${fM(Tt[1][1])}(${fV(b)}) \end{bmatrix}
-    = ${bvec(p1, p2)}`
+    = \begin{bmatrix} ${c(Tt[0][0])} & ${c(Tt[0][1])} \\ ${c(Tt[1][0])} & ${c(Tt[1][1])} \end{bmatrix}\!${vec('a', 'b')}
+    = \begin{bmatrix} ${c(Tt[0][0])}(${N('a')}) + ${c(Tt[0][1])}(${N('b')}) \\ ${c(Tt[1][0])}(${N('a')}) + ${c(Tt[1][1])}(${N('b')}) \end{bmatrix}
+    = ${vec('p0', 'p1')}`
 
   const update = String.raw`\mathbf{O}_e\,(\mathbf{T}^{\top}\mathbf{f}_t)
-    = \begin{bmatrix} ${fM(s1)} & 0 \\ 0 & ${fM(s2)} \end{bmatrix}\!${bvec(p1, p2)}
-    = \begin{bmatrix} ${fM(s1)}(${fV(p1)}) \\ ${fM(s2)}(${fV(p2)}) \end{bmatrix}
-    = ${bvec(w1, w2)}`
+    = \begin{bmatrix} ${N('s0', 2)} & 0 \\ 0 & ${N('s1', 2)} \end{bmatrix}\!${vec('p0', 'p1')}
+    = \begin{bmatrix} ${N('s0', 2)}(${N('p0')}) \\ ${N('s1', 2)}(${N('p1')}) \end{bmatrix}
+    = ${vec('w0', 'w1')}`
 
-  const normalize = String.raw`\alpha = \frac{1}{${fV(w1)} + ${fV(w2)}} = \frac{1}{${fV(Z)}} = ${fV(step.alpha)}
+  const normalize = String.raw`\alpha = \frac{1}{${N('w0')} + ${N('w1')}} = \frac{1}{${N('Z')}} = ${N('al')}
     \qquad
-    \mathbf{f}_{t+1} = \alpha\!${bvec(w1, w2)} = ${bvec(u1, u2)}`
+    \mathbf{f}_{t+1} = \alpha\!${vec('w0', 'w1')} = ${vec('u0', 'u1')}`
 
   return { predict, update, normalize }
 }

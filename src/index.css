@@ -135,3 +135,37 @@ svg {
   white-space: nowrap;
   border: 0;
 }
+
+/* --- Derivation number highlight -----------------------------------------
+   Individual numbers in the collapsible worked calculations (Topics 6 & 7)
+   are wrapped in .deriv-num via KaTeX \htmlClass. Only the ones that changed
+   on the latest render also get .deriv-num--hot, which briefly flashes just
+   that number (the text stays readable throughout). Honors reduced-motion. */
+.deriv-num {
+  border-radius: 3px;
+  padding: 0 1.5px;
+}
+.deriv-num--hot {
+  animation: deriv-num-flash 0.9s var(--ease-out, ease-out);
+}
+@keyframes deriv-num-flash {
+  0% {
+    background: color-mix(in srgb, var(--brand-400) 72%, transparent);
+    color: var(--text-on);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand-400) 45%, transparent);
+  }
+  65% {
+    background: color-mix(in srgb, var(--brand-400) 32%, transparent);
+    color: var(--text-on);
+  }
+  100% {
+    background: transparent;
+    color: inherit;
+    box-shadow: 0 0 0 2px transparent;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .deriv-num--hot {
+    animation: none;
+  }
+}
