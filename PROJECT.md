@@ -147,7 +147,7 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 - [x] Python tooling skeleton (`scripts/`, requirements.txt, `gen_all.py`) + `npm run gen` hook
 
 ### Phase 1 — Topics (ONE AT A TIME, USER-TRIGGERED ONLY)
-- [ ] Topic 1: Search Foundations
+- [x] Topic 1: Search Foundations
 - [x] Topic 2: Planning, STRIPS & POP ⭐
 - [x] Topic 3: Real-World Planning (critical path!) 
 - [x] Topic 4: Uncertainty & Probability
@@ -175,6 +175,8 @@ Shared primitives worth building once (during Phase 0/1): a **StepPlayer** contr
 
 ## 8. Changelog
 *(append one line per completed unit of work)*
+
+- **Topic 1 — Search Foundations.** Tested grid-search engine `src/lib/search.ts` (+ `search.test.ts`, 6 tests): one best-first loop parameterized by strategy — BFS (FIFO), DFS (LIFO), UCS (min g), Greedy (min h), A* (min g+h) — on a 4-connected grid with Manhattan h and the standard toward-goal tie-break; records a full frontier/explored/expanded trace. Asserts BFS/UCS/A* agree on optimal cost (open grid = 10; walled detour = 8), A* expands ≤ (and here <) UCS, and every strategy returns a valid start→goal path. Three tabs (`?tab=`): **Pathfinding lab** (step-through grid, strategy switch, click-to-toggle walls, colored frontier/explored/current/path + live expanded/cost stats), **Strategy race** (all five on one map — BFS 112 / UCS 108 / A* 45 / Greedy 28 nodes, optimal-cost + informed/optimal property badges), **Complexity & heuristics** (bᵈ vs b·m sliders on a log axis + admissible h≤h\* / consistent h≤c+h′ KaTeX cards). All use VizGuide.
 
 - **Phase 0 — Foundation.** Scaffolded Vite + React 19 + TS. Shell: collapsible `Sidebar` (reads a single `topics/registry.ts`), `App` layout, `Home` (course/exam overview + topic grid + live per-term formula showcase), `ComingSoon`/`NotFound`, `TopicRoute` dispatcher. Shared primitives: `FormulaBlock` (KaTeX + `term()` per-term highlight), `useStepPlayer` hook + `StepPlayer` control (keyboard: ←/→/Space/Home), `BarPair`/`BarStack`, `lib/graph.ts` edge geometry. Dark blue/purple design tokens. Python `scripts/` skeleton + `npm run gen`. All 10 topics greyed as coming-soon. `npm run build` verified.
 

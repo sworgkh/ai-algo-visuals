@@ -39,7 +39,9 @@ export const TOPICS: Topic[] = [
       'Greedy & A*',
       'Admissible & consistent heuristics',
       'O(b^d) vs O(b·m)',
-    ],    status: 'coming-soon',
+    ],
+    status: 'available',
+    Component: lazy(() => import('./topic01-search')),
   },
   {
     num: 2,

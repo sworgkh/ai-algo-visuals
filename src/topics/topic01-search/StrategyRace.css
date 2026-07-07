@@ -1,0 +1,112 @@
+.sr {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.sr-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.sr-head,
+.sr-row {
+  display: grid;
+  grid-template-columns: 80px 90px 1fr 80px 190px;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-0);
+}
+.sr-head {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background: var(--surface-1);
+}
+.sr-name {
+  font-weight: 650;
+  color: var(--text-strong);
+}
+.sr-frontier {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+.sr-bar-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.sr-bar-track {
+  flex: 1;
+  height: 14px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.sr-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-400), var(--brand-500));
+  border-radius: var(--radius-sm);
+  transition: width 0.4s var(--ease-out);
+}
+.sr-bar-val {
+  min-width: 30px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.sr-cost {
+  font-size: var(--text-base);
+  font-weight: 700;
+  text-align: center;
+}
+.sr-cost.is-opt {
+  color: var(--viz-4);
+}
+.sr-cost.is-subopt {
+  color: var(--warning, #fbbf24);
+}
+.sr-props {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.sr-tag {
+  font-style: normal;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+.sr-tag--informed {
+  color: var(--viz-3);
+  border-color: color-mix(in srgb, var(--viz-3) 40%, transparent);
+}
+.sr-tag--opt {
+  color: var(--viz-4);
+  border-color: color-mix(in srgb, var(--viz-4) 40%, transparent);
+}
+.sr-tag--no {
+  color: var(--warning, #fbbf24);
+  border-color: color-mix(in srgb, var(--warning, #fbbf24) 35%, transparent);
+}
+
+.sr-note {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.sr-note strong {
+  color: var(--text-strong);
+}
