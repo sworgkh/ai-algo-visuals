@@ -43,14 +43,16 @@
   --danger-dim: #f8717126;
   --info: var(--brand-400);
 
-  /* ---- Data-viz categorical palette (accessible on dark surfaces) ------- */
+  /* ---- Data-viz categorical palette (accessible on dark surfaces) -------
+     Ordered so ADJACENT categories are far apart on the hue wheel — never two
+     neighbouring blue/purple tones next to each other. */
   --viz-1: #818cf8; /* indigo   */
-  --viz-2: #a78bfa; /* violet   */
+  --viz-2: #f472b6; /* pink     */
   --viz-3: #22d3ee; /* cyan     */
   --viz-4: #34d399; /* green    */
   --viz-5: #fbbf24; /* amber    */
   --viz-6: #fb7185; /* rose     */
-  --viz-7: #f472b6; /* pink     */
+  --viz-7: #a78bfa; /* violet   */
   --viz-8: #4ade80; /* lime     */
 
   /* Roles used by algorithm visualizations */
