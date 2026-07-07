@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { filter } from '@/lib/hmm'
+import { type FilterStep, type HMM, filter } from '@/lib/hmm'
 import { useStepPlayer } from '@/hooks/useStepPlayer'
 import { StepPlayer } from '@/components/StepPlayer'
 import { FormulaBlock } from '@/components/FormulaBlock'
 import { term } from '@/components/formula'
 import { VizGuide } from '@/components/VizGuide'
-import { DEFAULT_OBS, NOUMB, OBS_LABEL, RAIN, UMB, UMBRELLA_HMM } from './domain'
+import { DEFAULT_OBS, NORAIN, NOUMB, OBS_LABEL, RAIN, UMB, UMBRELLA_HMM } from './domain'
 import './FilteringView.css'
 
 const TEX = String.raw`P(R_t \mid e_{1:t}) = ${term('update', '\\alpha\\, P(e_t \\mid R_t)')}\; ${term(
@@ -42,6 +42,8 @@ export function FilteringView() {
       : `Update with ${OBS_LABEL[obs[day]]}: reweight by the sensor and normalize → P(R) = ${step.updated[
           RAIN
         ].toFixed(3)}.`
+
+  const deriv = buildDerivation(prevRain, step, UMBRELLA_HMM, obs[day])
 
   return (
     <div className="flt">
@@ -105,7 +107,61 @@ export function FilteringView() {
         </div>
       </div>
 
+      <details className="flt-deriv">
+        <summary>
+          <span className="flt-deriv-caret" aria-hidden>▶</span>
+          Show the full calculation for day {day + 1} — every number plugged in
+        </summary>
+        <div className="flt-deriv-body">
+          <div className="flt-deriv-line">
+            <span className="flt-deriv-tag flt-deriv-tag--predict">1 · predict</span>
+            <FormulaBlock tex={deriv.predict} ariaLabel="prediction expansion with numbers" />
+          </div>
+          <div className="flt-deriv-line">
+            <span className="flt-deriv-tag flt-deriv-tag--update">2 · update</span>
+            <FormulaBlock tex={deriv.update} ariaLabel="sensor update and normalization with numbers" />
+          </div>
+        </div>
+      </details>
+
       <StepPlayer player={player} stepLabel={`Day ${day + 1} · ${phase}`} caption={caption} />
     </div>
   )
+}
+
+const f2 = (n: number) => n.toFixed(2)
+const f3 = (n: number) => n.toFixed(3)
+
+interface Derivation {
+  predict: string
+  update: string
+}
+
+/** The full scalar expansion of one filtering day with every number plugged in. */
+function buildDerivation(prevRain: number, step: FilterStep, hmm: HMM, obs: string): Derivation {
+  const pr = prevRain
+  const pnr = 1 - prevRain
+  const predR = step.predicted[RAIN]
+  const predNR = step.predicted[NORAIN]
+  const sR = hmm.sensor[RAIN][obs]
+  const sNR = hmm.sensor[NORAIN][obs]
+  const wR = sR * predR
+  const wNR = sNR * predNR
+  const Z = wR + wNR
+  const updR = step.updated[RAIN]
+
+  const predict = String.raw`\begin{aligned}
+    P(R_t \mid e_{1:t-1}) &= \sum_r P(R_t \mid r)\,P(r \mid e_{1:t-1}) \\[2pt]
+    &= ${f2(hmm.trans[RAIN][RAIN])}(${f3(pr)}) + ${f2(hmm.trans[NORAIN][RAIN])}(${f3(pnr)}) = \mathbf{${f3(predR)}} \\[2pt]
+    P(\lnot R_t \mid e_{1:t-1}) &= ${f2(hmm.trans[RAIN][NORAIN])}(${f3(pr)}) + ${f2(hmm.trans[NORAIN][NORAIN])}(${f3(pnr)}) = \mathbf{${f3(predNR)}}
+  \end{aligned}`
+
+  const update = String.raw`\begin{aligned}
+    \tilde P(R_t) &= P(e_t \mid R_t)\,P(R_t \mid e_{1:t-1}) = ${f2(sR)}(${f3(predR)}) = ${f3(wR)} \\[2pt]
+    \tilde P(\lnot R_t) &= ${f2(sNR)}(${f3(predNR)}) = ${f3(wNR)} \\[2pt]
+    \alpha &= \frac{1}{${f3(wR)} + ${f3(wNR)}} = \frac{1}{${f3(Z)}} = ${f3(1 / Z)} \\[2pt]
+    P(R_t \mid e_{1:t}) &= \alpha\,\tilde P(R_t) = \mathbf{${f3(updR)}}
+  \end{aligned}`
+
+  return { predict, update }
 }

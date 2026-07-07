@@ -137,3 +137,71 @@
   font-weight: 650;
   color: var(--text-strong);
 }
+
+/* Collapsible full-calculation expansion */
+.flt-deriv {
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.flt-deriv > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  user-select: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.flt-deriv > summary::-webkit-details-marker {
+  display: none;
+}
+.flt-deriv > summary:hover {
+  color: var(--text-strong);
+}
+.flt-deriv-caret {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.flt-deriv[open] .flt-deriv-caret {
+  transform: rotate(90deg);
+}
+.flt-deriv-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+.flt-deriv-line {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.flt-deriv-tag {
+  align-self: flex-start;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+.flt-deriv-tag--predict {
+  color: var(--brand-300, #a5b4fc);
+  border-color: color-mix(in srgb, var(--brand-500) 40%, transparent);
+}
+.flt-deriv-tag--update {
+  color: var(--viz-7);
+  border-color: color-mix(in srgb, var(--viz-7) 40%, transparent);
+}
